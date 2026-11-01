@@ -1,21 +1,86 @@
 ---
 import Base from '../layouts/Base.astro';
+import Factsheet from '../components/Factsheet.astro';
 import { site } from '../data/site';
 import '../styles/story.css';
 
-const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-const bars = [42, 58, 51, 67, 74, 88];
-const tiles = [
-  { t: 'Accounting', x: -340, y: -220, r: -14 },
-  { t: 'Finance', x: 120, y: -300, r: 9 },
-  { t: 'Marketing', x: 380, y: -160, r: 16 },
-  { t: 'Economics', x: 460, y: 60, r: -10 },
-  { t: 'Culture', x: -420, y: 120, r: 12 },
-  { t: 'People management', x: -160, y: 300, r: -8 },
-  { t: 'Teamwork', x: 200, y: 320, r: 14 },
-  { t: 'Communication', x: 420, y: 260, r: -16 },
+const way = [
+  {
+    short: 'Understand',
+    title: 'Understand the team',
+    body: "I sit with the people doing the work and learn how their process really runs, not just how it's written down.",
+    eg: 'Product and sales were checking every client factsheet by hand.',
+  },
+  {
+    short: 'Pinpoint',
+    title: 'Pinpoint the bottleneck',
+    body: 'I find where the time actually goes and what it costs the team.',
+    eg: 'Each check took about an hour, for every document, every month.',
+  },
+  {
+    short: 'Shape',
+    title: 'Shape the idea',
+    body: 'I turn the problem into something buildable and agree with the team what a good result looks like.',
+    eg: 'AI does the first pass, so people only review what needs attention.',
+  },
+  {
+    short: 'Prototype',
+    title: 'Build a prototype fast',
+    body: 'Using AI coding tools like Claude Code, I get a working version in front of the team quickly, so they react to something real.',
+    eg: 'A first version of the checker, tested on real factsheets.',
+  },
+  {
+    short: 'Refine',
+    title: 'Refine it with the team',
+    body: "I test it with the people who'll use it and adjust until it fits into their day.",
+    eg: 'Feedback from product and sales shaped what the checks report.',
+  },
+  {
+    short: 'Ship',
+    title: 'Ship it and support it',
+    body: 'It goes through development into production, and I stay close to make sure it keeps saving time.',
+    eg: 'Now in production. Checks take about five minutes instead of an hour.',
+  },
 ];
-const stations = ['Prototype', 'Development', 'Testing', 'Production'];
+
+const rawRows = [
+  ['31/03/2026', 'Northwind Systems', 'Technology', '4.8', '3.1'],
+  ['31/03/2026', 'Halvorsen Health', 'Healthcare', '4.1', '2.6'],
+  ['31/03/2026', 'Corvel Software', 'Technology', '3.9', '4.0'],
+  ['31/03/2026', 'Brightwater Utilities', 'Utilities', '3.2', '0.8'],
+  ['31/03/2026', 'Aldane Industrial', 'Industrials', '2.9', '1.7'],
+  ['31/03/2026', 'Marlow Financial', 'Financials', '2.7', '2.2'],
+];
+const xform = [
+  ['Technology', '26.0', '=SUMIFS(Raw!$D:$D, Raw!$C:$C, $A2)'],
+  ['Healthcare', '18.0', '=SUMIFS(Raw!$D:$D, Raw!$C:$C, $A3)'],
+  ['Financials', '16.0', '=SUMIFS(Raw!$D:$D, Raw!$C:$C, $A4)'],
+  ['Industrials', '14.0', '=SUMIFS(Raw!$D:$D, Raw!$C:$C, $A5)'],
+  ['Consumer', '12.0', '=SUMIFS(Raw!$D:$D, Raw!$C:$C, $A6)'],
+];
+
+const webK = [
+  { t: 'Accounting', x: 205, y: 140, d: 0.05 },
+  { t: 'Finance', x: 515, y: 140, d: 0.1 },
+  { t: 'Economics', x: 515, y: 340, d: 0.15 },
+  { t: 'Marketing', x: 205, y: 340, d: 0.2 },
+];
+const webS = [
+  { t: 'Leading and motivating people', x: 360, y: 40, d: 0.55 },
+  { t: 'Working across cultures', x: 612, y: 240, d: 0.6 },
+  { t: 'Building teams that deliver', x: 360, y: 440, d: 0.65 },
+  { t: 'Communicating with clarity', x: 108, y: 240, d: 0.7 },
+];
+const C = { x: 360, y: 240 };
+const edges: { a: { x: number; y: number }; b: { x: number; y: number }; d: number; soft?: boolean }[] = [
+  ...webK.map((k) => ({ a: C, b: k, d: k.d })),
+  ...webK.map((k, i) => ({ a: k, b: webK[(i + 1) % 4], d: 0.25 + i * 0.04 })),
+  ...webS.flatMap((s, i) => [
+    { a: s, b: webK[i], d: s.d, soft: true },
+    { a: s, b: webK[(i + 1) % 4], d: s.d + 0.03, soft: true },
+  ]),
+];
+const w = (t: string, fs: number) => Math.round(t.length * fs * 0.56 + 28);
 ---
 <Base>
   <!-- Hero -->
@@ -25,219 +90,301 @@ const stations = ['Prototype', 'Development', 'Testing', 'Production'];
       <h1 class="hero-title">Data engineer.<br /><span class="dim">Business thinker.</span></h1>
       <p class="hero-sub">{site.headline}</p>
       <div class="hero-actions">
-        <a class="btn" href="#automation">See how it works</a>
+        <a class="btn" href="#how-i-work">See how I work</a>
         <a class="btn ghost" href="/contact">Get in touch</a>
       </div>
     </div>
     <p class="scroll-cue" aria-hidden="true">Scroll</p>
   </section>
 
-  <!-- Chapter 1: client report automation -->
-  <section class="scene light" id="automation" data-scene data-steps="3" aria-label="Chapter 1: client report automation">
+  <!-- Chapter 1: how I work with a team -->
+  <section class="scene light way" id="how-i-work" data-scene data-steps="6" aria-label="How I work with a team">
+    <div class="pin">
+      <div class="wrap way-wrap">
+        <p class="kicker">How I work</p>
+        <h2 class="way-title">I find what slows a team down, and build what fixes it.</h2>
+        <div class="track">
+          <div class="rail"><span></span></div>
+          <ol>
+            {way.map((s, i) => <li data-from={i}><i></i><span>{s.short}</span></li>)}
+          </ol>
+        </div>
+        <div class="way-cards">
+          {way.map((s, i) => (
+            <div class="way-card" data-at={i}>
+              <p class="way-n">Step {i + 1} of {way.length}</p>
+              <h3>{s.title}</h3>
+              <p>{s.body}</p>
+              <p class="way-eg"><b>In practice:</b> {s.eg}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Chapter 2: the master file -->
+  <section class="scene light master" id="automation" data-scene data-steps="4" aria-label="Automating monthly client factsheets">
     <div class="pin">
       <div class="wrap pin-grid">
         <div class="caps">
           <p class="kicker">Client report automation</p>
           <div class="cap-stack">
             <div class="cap" data-at="0">
-              <h2>It starts as raw data.</h2>
-              <p>Exports from different systems, each with its own formats, gaps and duplicates. Not something you can send to a client.</p>
+              <h2>One click pulls in the raw data.</h2>
+              <p>The source data lives in Excel and Word files. In the master file, a single click on Update pulls all of it into the Raw data sheet.</p>
             </div>
             <div class="cap" data-at="1">
-              <h2>Then it gets transformed.</h2>
-              <p>The pipeline cleans, standardises and validates every row, so dates line up, duplicates disappear and missing values are caught.</p>
+              <h2>Formulas and macros do the work.</h2>
+              <p>The Transformation sheet calculates everything the report needs, and a dynamic named range passes the results through to the output.</p>
             </div>
             <div class="cap" data-at="2">
-              <h2>And becomes a finished report.</h2>
-              <p>The final client report is generated automatically, then the whole process runs again next month without anyone rebuilding it.</p>
+              <h2>The factsheet builds itself.</h2>
+              <p>The Output sheet becomes a finished client factsheet: charts, tables, key figures and commentary, all generated from the data.</p>
+            </div>
+            <div class="cap" data-at="3">
+              <h2>Save as final. That's it.</h2>
+              <p>Each month a person clicks Update, then saves the output as the final document. Everything in between is automatic. Then it goes for checking.</p>
             </div>
           </div>
         </div>
 
         <div class="stage">
-          <div class="win">
-            <div class="win-bar">
+          <ul class="sources" aria-label="Source files">
+            <li class="xl"><i>X</i>Holdings.xlsx</li>
+            <li class="xl"><i>X</i>Performance.xlsx</li>
+            <li class="wd"><i>W</i>Commentary.docx</li>
+          </ul>
+
+          <div class="xlwin">
+            <div class="xl-bar">
               <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
-              <span class="win-titles">
-                <span data-at="0">raw_export.csv</span>
-                <span data-at="1">transform.py</span>
-                <span data-at="2">Client report, March</span>
+              <span>Master file.xlsm</span>
+            </div>
+            <div class="xl-ribbon">
+              <span class="xl-btn update">Update</span>
+              <span class="xl-btn save">Save as final</span>
+            </div>
+            <div class="xl-formula">
+              <span class="fx">fx</span>
+              <span class="fx-stack">
+                <code data-at="0">Pulled 3 source files into Raw data</code>
+                <code data-at="1">=SUMIFS(Raw!$D:$D, Raw!$C:$C, $A2)</code>
+                <code data-at="2">Output ← Output_Sectors (dynamic named range)</code>
+                <code data-at="3">Saved as Factsheet_March_2026.pdf</code>
               </span>
             </div>
-            <div class="win-body">
-              <table class="data" data-until="1">
-                <thead><tr><th>Client</th><th>Date</th><th>Revenue</th><th>Region</th></tr></thead>
-                <tbody>
-                  <tr>
-                    <td class="fix" data-from="1"><span class="raw">ACME ltd</span><span class="cln">Acme Ltd</span></td>
-                    <td class="fix" data-from="1"><span class="raw">03/02/26</span><span class="cln">2026-02-03</span></td>
-                    <td class="fix" data-from="1"><span class="raw">12,400 </span><span class="cln">12400</span></td>
-                    <td class="fix" data-from="1"><span class="raw">&nbsp;</span><span class="cln">APAC</span></td>
-                  </tr>
-                  <tr class="dup" data-from="1">
-                    <td>Acme Ltd.</td><td>2026-02-03</td><td>12400</td><td>APAC</td>
-                  </tr>
-                  <tr>
-                    <td>Northwind</td>
-                    <td class="fix" data-from="1"><span class="raw">Feb 5</span><span class="cln">2026-02-05</span></td>
-                    <td class="fix" data-from="1"><span class="raw">n/a</span><span class="cln">9310</span></td>
-                    <td>EMEA</td>
-                  </tr>
-                  <tr>
-                    <td>Globex</td><td>2026-02-07</td>
-                    <td class="fix" data-from="1"><span class="raw">8,950</span><span class="cln">8950</span></td>
-                    <td class="fix" data-from="1"><span class="raw">apac</span><span class="cln">APAC</span></td>
-                  </tr>
-                  <tr>
-                    <td>Initech</td>
-                    <td class="fix" data-from="1"><span class="raw">&nbsp;</span><span class="cln">2026-02-11</span></td>
-                    <td>15200</td><td>AMER</td>
-                  </tr>
-                </tbody>
-              </table>
 
-              <div class="report" data-from="2">
-                <div class="report-head">
-                  <div>
-                    <strong>Monthly client report</strong>
-                    <span>March 2026</span>
-                  </div>
-                  <span class="auto">Generated automatically</span>
-                </div>
-                <div class="kpis">
-                  <div><b>4</b><span>Clients</span></div>
-                  <div><b>45.9k</b><span>Revenue</span></div>
-                  <div><b>0</b><span>Errors</span></div>
-                </div>
-                <div class="bars" aria-hidden="true">
-                  {bars.map((h, i) => <i style={`--v:${h}%; --d:${i * 70}ms`}></i>)}
+            <div class="xl-body">
+              <div class="sheet raw" data-at="0">
+                <table class="grid">
+                  <thead><tr><th></th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th></tr></thead>
+                  <tbody>
+                    <tr class="hdr"><th>1</th><td>Date</td><td>Security</td><td>Sector</td><td>Weight %</td><td>Return %</td></tr>
+                    {rawRows.map((r, i) => (
+                      <tr class="fillrow" style={`--d:${i * 90}ms`}><th>{i + 2}</th>{r.map((c) => <td>{c}</td>)}</tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="sheet xform" data-at="1">
+                <table class="grid">
+                  <thead><tr><th></th><th>A</th><th>B</th><th>C</th></tr></thead>
+                  <tbody>
+                    <tr class="hdr"><th>1</th><td>Sector</td><td>Weight %</td><td>Formula in B</td></tr>
+                    {xform.map((r, i) => (
+                      <tr class={i === 0 ? 'sel' : ''}><th>{i + 2}</th><td class="nr">{r[0]}</td><td class="nr">{r[1]}</td><td class="f">{r[2]}</td></tr>
+                    ))}
+                  </tbody>
+                </table>
+                <p class="named">Named range <b>Output_Sectors</b> resizes automatically as data changes</p>
+                <p class="macro">Macro <b>BuildCharts</b> refreshes every chart on the Output sheet</p>
+              </div>
+
+              <div class="sheet out" data-from="2">
+                <Factsheet size="8.6px" />
+              </div>
+
+              <div class="saved" data-from="3">
+                <span class="pdf">PDF</span>
+                <div>
+                  <b>Factsheet_March_2026.pdf</b>
+                  <span>Saved as final. Sent for checking.</span>
                 </div>
               </div>
             </div>
-          </div>
 
-          <div class="months" aria-label="Runs every month">
-            <span class="months-label">Runs every month</span>
-            <ol>
-              {months.map((m, i) => <li data-p={(0.7 + i * 0.022).toFixed(3)}>{m}</li>)}
-            </ol>
+            <div class="xl-tabs">
+              <span class="tab" data-at="0">Raw data</span>
+              <span class="tab" data-at="1">Transformation</span>
+              <span class="tab" data-from="2">Output</span>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Chapter 2: AI report checker -->
-  <section class="scene dark" id="ai-checker" data-scene data-steps="4" aria-label="Chapter 2: AI report-checking app">
+  <!-- Chapter 3: AI checker -->
+  <section class="scene dark checker" id="ai-checker" data-scene data-steps="6" aria-label="AI factsheet checker">
     <div class="pin">
-      <div class="wrap pin-grid">
+      <div class="wrap pin-grid check-layout">
         <div class="caps">
-          <p class="kicker">AI report checker</p>
+          <p class="kicker">AI checking app</p>
           <div class="cap-stack">
             <div class="cap" data-at="0">
-              <h2>Every report needed checking.</h2>
-              <p>Before a client report goes out, the product and sales teams have to check it. By hand, that took about an hour each.</p>
+              <h2>Every factsheet needs checking.</h2>
+              <p>Before anything reaches a client, the product and sales teams review it. By hand, that took about an hour per document.</p>
             </div>
             <div class="cap" data-at="1">
-              <h2>So I gave it three reviewers.</h2>
-              <p>Three separate AI agents read the same report, and each one runs its own individual checks.</p>
+              <h2>Agent 1 checks how it looks.</h2>
+              <p>The visual agent reads the page like a person would: spelling, formatting, and whether tables and charts are the right size.</p>
             </div>
             <div class="cap" data-at="2">
-              <h2>They compare notes.</h2>
-              <p>Before answering, the agents discuss their findings with each other, confirming issues and ruling out false alarms.</p>
+              <h2>Agent 2 checks what changed.</h2>
+              <p>The period agent compares this month's output with last month's and asks whether each change makes sense.</p>
             </div>
             <div class="cap" data-at="3">
-              <h2>You get one clear verdict.</h2>
-              <p>The app returns a finalised outcome: what's fine, what needs a look and what needs fixing, so the team goes straight to what matters.</p>
+              <h2>Agent 3 checks the numbers.</h2>
+              <p>The raw data agent traces the output back to the raw data, so the transformation is right and nothing is misstated.</p>
+            </div>
+            <div class="cap" data-at="4">
+              <h2>Then they reconcile.</h2>
+              <p>Before reporting, the agents question each other. If one suspects a problem, the others confirm it or rule it out, so the team isn't sent chasing false alarms.</p>
+            </div>
+            <div class="cap" data-at="5">
+              <h2>One clear outcome.</h2>
+              <p>The team gets a single list of what's fine, what to look at and what to fix, and goes straight to what matters.</p>
             </div>
           </div>
         </div>
 
-        <div class="stage">
-          <div class="agents">
-            <svg class="links" viewBox="0 0 600 500" preserveAspectRatio="none" aria-hidden="true">
-              <g class="scan" data-from="1">
-                <line x1="110" y1="95" x2="250" y2="210" />
-                <line x1="490" y1="95" x2="350" y2="210" />
-                <line x1="300" y1="420" x2="300" y2="330" />
-              </g>
-              <g class="talk" data-from="2">
-                <line x1="110" y1="95" x2="490" y2="95" />
-                <line x1="490" y1="95" x2="300" y2="420" />
-                <line x1="300" y1="420" x2="110" y2="95" />
-              </g>
-            </svg>
-
-            <div class="doc" data-until="2">
-              <span class="doc-title">Client report</span>
-              <i></i><i></i><i class="short"></i><i></i><i></i><i class="short"></i>
-            </div>
-
-            <div class="agent a1" data-from="1"><span class="orb">1</span><span>Agent 1</span></div>
-            <div class="agent a2" data-from="1"><span class="orb">2</span><span>Agent 2</span></div>
-            <div class="agent a3" data-from="1"><span class="orb">3</span><span>Agent 3</span></div>
-
-            <p class="bubble b1" data-at="2">Totals on page 3 don't reconcile.</p>
-            <p class="bubble b2" data-at="2">Confirmed. Source has the right figure.</p>
-            <p class="bubble b3" data-at="2">Fee wording checks out.</p>
-
-            <div class="verdict" data-from="3">
+        <div class="stage check-stage">
+          <div class="doc-col">
+            <Factsheet size="9.6px" class="check-doc" />
+            <div class="verdict" data-from="5">
               <strong>Check complete</strong>
               <ul>
-                <li class="ok"><span></span>Fine: 14 checks passed</li>
-                <li class="look"><span></span>Look at: fee wording on page 2</li>
-                <li class="fixit"><span></span>Fix: totals mismatch on page 3</li>
+                <li class="fixit"><span></span><div><b>Fix</b> Spelling: "perfomance" in the introduction</div></li>
+                <li class="look"><span></span><div><b>Look at</b> Holdings rose from 47 to 48. Confirm the new position.</div></li>
+                <li class="ok"><span></span><div><b>Fine</b> Table sizes, figures and returns all reconcile</div></li>
               </ul>
             </div>
           </div>
-          <p class="note">Illustrative example</p>
+
+          <div class="panel-col">
+            <div class="pcard" data-at="0">
+              <p class="pc-big">~60 min</p>
+              <p class="pc-sub">of manual checking for every factsheet, every month.</p>
+            </div>
+
+            <div class="pcard" data-at="1">
+              <div class="pc-head"><span class="orb">1</span><div><b>Visual agent</b><span>Spelling, formatting, layout</span></div></div>
+              <ul class="finds">
+                <li class="bad">"perfomance" is misspelled</li>
+                <li class="warn">Holdings table may be the wrong size</li>
+                <li class="good">Charts and labels are readable</li>
+              </ul>
+            </div>
+
+            <div class="pcard" data-at="2">
+              <div class="pc-head"><span class="orb">2</span><div><b>Period agent</b><span>This month vs last month</span></div></div>
+              <table class="diff">
+                <thead><tr><th></th><th>Feb</th><th>Mar</th><th></th></tr></thead>
+                <tbody>
+                  <tr><td>1M return</td><td>1.1%</td><td>2.4%</td><td class="good">Expected</td></tr>
+                  <tr><td>Holdings</td><td>47</td><td>48</td><td class="warn">Confirm</td></tr>
+                  <tr><td>Table rows</td><td>5</td><td>5</td><td class="good">Unchanged</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="pcard" data-at="3">
+              <div class="pc-head"><span class="orb">3</span><div><b>Raw data agent</b><span>Output vs raw data</span></div></div>
+              <table class="diff">
+                <thead><tr><th>Security</th><th>Raw</th><th>Output</th><th></th></tr></thead>
+                <tbody>
+                  <tr><td>Northwind</td><td>4.8</td><td>4.8</td><td class="good">Match</td></tr>
+                  <tr><td>Halvorsen</td><td>4.1</td><td>4.1</td><td class="good">Match</td></tr>
+                  <tr><td>Corvel</td><td>3.9</td><td>3.9</td><td class="good">Match</td></tr>
+                </tbody>
+              </table>
+              <p class="pc-foot">All 5 holdings and 6 sector weights match.</p>
+            </div>
+
+            <div class="pcard chat" data-at="4">
+              <p class="msg"><span class="orb s">1</span><span>The holdings table looks the wrong size. Agent 2, how big was it last period?</span></p>
+              <p class="msg"><span class="orb s">2</span><span>Same 5 rows and width as February. No change, so it's fine.</span></p>
+              <p class="msg"><span class="orb s">3</span><span>All 5 rows match the raw data too. Not an issue.</span></p>
+              <p class="msg"><span class="orb s">1</span><span>Agreed, dropping it. The spelling error still stands.</span></p>
+            </div>
+
+            <div class="pcard" data-at="5">
+              <p class="pc-big">~5 min</p>
+              <p class="pc-sub">to review the outcome and make the fixes.</p>
+            </div>
+          </div>
+          <p class="note">Illustrative example with invented data</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Chapter 3: time saved -->
+  <!-- Result -->
   <section class="scene dark stat" data-scene data-steps="1" aria-label="Result: checking time cut from about an hour to about five minutes">
     <div class="pin">
       <div class="wrap stat-wrap">
         <p class="kicker">The result</p>
         <p class="big"><span data-count-from="60" data-count-to="5">5</span> min</p>
-        <p class="stat-sub">to check a client report, down from about an hour.</p>
+        <p class="stat-sub">to check a client factsheet, down from about an hour.</p>
         <div class="timebar" aria-hidden="true"><span></span></div>
         <div class="timebar-labels" aria-hidden="true"><span>Before: ~60 min</span><span>After: ~5 min</span></div>
       </div>
     </div>
   </section>
 
-  <!-- Chapter 4: development to production -->
-  <section class="scene light" data-scene data-steps="4" aria-label="Chapter 3: from prototype to production">
+  <!-- Chapter 4: the business side -->
+  <section class="scene light biz" data-scene data-steps="2" aria-label="The business side: Bachelor of Commerce">
     <div class="pin">
-      <div class="wrap ship">
-        <p class="kicker">Built to ship</p>
-        <h2 class="ship-title">From an idea to an app people use every day.</h2>
-        <p class="ship-sub">I took the checker through development and into production, where the product and sales teams rely on it for their checks.</p>
-        <div class="track">
-          <div class="rail"><span></span></div>
-          <ol>
-            {stations.map((s, i) => <li data-from={i}><i></i><span>{s}</span></li>)}
-          </ol>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Chapter 5: Commerce degree -->
-  <section class="scene light biz" data-scene data-steps="1" aria-label="Chapter 4: Bachelor of Commerce">
-    <div class="pin">
-      <div class="wrap biz-wrap">
-        <div class="biz-copy">
+      <div class="wrap pin-grid biz-grid">
+        <div class="caps">
           <p class="kicker">The business side</p>
-          <h2>I know what the data is for.</h2>
-          <p>My Bachelor of Commerce, majoring in international business, gave me a working understanding of how businesses run, from the numbers to the people.</p>
+          <div class="cap-stack">
+            <div class="cap" data-at="0">
+              <h2>Understanding the data.</h2>
+              <p>My Bachelor of Commerce in international business showed me how the numbers connect. Accounting, finance, economics and marketing all feed into each other, and so does the data behind them.</p>
+            </div>
+            <div class="cap" data-at="1">
+              <h2>And the people behind it.</h2>
+              <p>It also taught me how to lead, work across cultures and build teams that deliver. That's what turning a team's problem into a working product really takes.</p>
+            </div>
+          </div>
         </div>
-        <ul class="tiles">
-          {tiles.map((t) => <li style={`--x:${t.x}; --y:${t.y}; --r:${t.r}`}>{t.t}</li>)}
-        </ul>
+        <div class="stage">
+          <svg class="web" viewBox="0 0 720 480" role="img" aria-label="A web connecting the Bachelor of Commerce to accounting, finance, economics and marketing, and to leading people, working across cultures, building teams and communicating clearly.">
+            {edges.map((e) => (
+              <line class={e.soft ? 'edge soft' : 'edge'} x1={e.a.x} y1={e.a.y} x2={e.b.x} y2={e.b.y} pathLength="1" style={`--d:${e.d}`} />
+            ))}
+            {webS.map((n) => (
+              <g class="wnode soft" style={`--d:${n.d}`}>
+                <rect x={n.x - w(n.t, 14) / 2} y={n.y - 19} width={w(n.t, 14)} height="38" rx="19" />
+                <text x={n.x} y={n.y + 5}>{n.t}</text>
+              </g>
+            ))}
+            {webK.map((n) => (
+              <g class="wnode" style={`--d:${n.d}`}>
+                <rect x={n.x - w(n.t, 15) / 2} y={n.y - 20} width={w(n.t, 15)} height="40" rx="20" />
+                <text x={n.x} y={n.y + 5}>{n.t}</text>
+              </g>
+            ))}
+            <g class="wnode core" style="--d:0">
+              <rect x="250" y="208" width="220" height="64" rx="32" />
+              <text x="360" y="236">Bachelor of Commerce</text>
+              <text x="360" y="256" class="sub">International business</text>
+            </g>
+          </svg>
+        </div>
       </div>
     </div>
   </section>
@@ -245,8 +392,8 @@ const stations = ['Prototype', 'Development', 'Testing', 'Production'];
   <!-- Close -->
   <section class="close">
     <div class="wrap">
-      <h2>Raw data in.<br />Checked results out.</h2>
-      <p>I'm looking for {site.openTo.toLowerCase()}. I'd like to hear what your team is building.</p>
+      <h2>Every team has a process that could run faster.</h2>
+      <p>I'm looking for {site.openTo.toLowerCase()} where I can find those processes and build what fixes them.</p>
       <div class="hero-actions center">
         <a class="btn light" href="/contact">Get in touch</a>
         <a class="btn ghost light" href="/projects">Read the project write-ups</a>
@@ -259,9 +406,8 @@ const stations = ['Prototype', 'Development', 'Testing', 'Production'];
   // Drives every pinned chapter from the scroll position.
   // --p is the chapter's progress (0 to 1); --pe is an eased version used for motion.
   const scenes = Array.from(document.querySelectorAll<HTMLElement>('[data-scene]'));
-  const clamp = (v: number) => Math.min(1, Math.max(0, v));
-
   const darkZones = Array.from(document.querySelectorAll<HTMLElement>('.scene.dark, .close'));
+  const clamp = (v: number) => Math.min(1, Math.max(0, v));
 
   function update() {
     const vh = window.innerHeight;
@@ -271,6 +417,7 @@ const stations = ['Prototype', 'Development', 'Testing', 'Production'];
       return r.top <= 30 && r.bottom > 30;
     });
     document.documentElement.classList.toggle('nav-dark', navDark);
+
     for (const scene of scenes) {
       const rect = scene.getBoundingClientRect();
       const span = rect.height - vh;
@@ -287,10 +434,6 @@ const stations = ['Prototype', 'Development', 'Testing', 'Production'];
         el.classList.toggle('on', Number(el.dataset.at) === step));
       scene.querySelectorAll<HTMLElement>('[data-from]').forEach((el) =>
         el.classList.toggle('on', step >= Number(el.dataset.from)));
-      scene.querySelectorAll<HTMLElement>('[data-until]').forEach((el) =>
-        el.classList.toggle('on', step <= Number(el.dataset.until)));
-      scene.querySelectorAll<HTMLElement>('[data-p]').forEach((el) =>
-        el.classList.toggle('on', p >= Number(el.dataset.p)));
       scene.querySelectorAll<HTMLElement>('[data-count-from]').forEach((el) => {
         const from = Number(el.dataset.countFrom);
         const to = Number(el.dataset.countTo);

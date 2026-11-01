@@ -7,9 +7,9 @@ export const site = {
   role: 'Data engineer',
   location: '[[City, Country]]',
   headline:
-    'I build the pipelines, automations and AI-powered apps that turn raw business data into finished, checked output.',
+    'I get to know a team, find what slows it down, and build the apps, automations and AI tools that make its work faster.',
   intro:
-    "I'm a data engineer with a Bachelor of Commerce in international business. In my internship I automated monthly client reporting end to end and built an AI app, now in production, that cut report checking from about an hour to about five minutes.",
+    "I'm a data engineer with a Bachelor of Commerce in international business. At Lazard Asset Management I automated monthly client factsheets and built an AI checking app, now in production, that cut checking time from about an hour to about five minutes.",
   email: '', // add a public contact email to show it on the Contact page
   github: 'https://github.com/adamquinlana',
   linkedin: '', // e.g. https://www.linkedin.com/in/your-profile
@@ -27,13 +27,13 @@ export const skills = {
 export const experience = [
   {
     title: 'Data Engineering Intern',
-    org: '[[Company name]]',
+    org: 'Lazard Asset Management',
     period: '[[Start month Year]] – Present',
     points: [
-      'Automated monthly client reporting end to end: raw data is ingested, transformed and turned into a finished report on a monthly schedule.',
-      'Ran the monthly client reports for the business and maintained the automation behind them.',
-      'Built an AI report-checking app, taken from development into production, where three AI agents check each report independently and then compare notes to produce one outcome.',
-      'Cut the product and sales teams’ checking time from about an hour to about five minutes per report.',
+      'Ran the monthly client reporting process and automated it with an Excel master file: one click pulls in the raw data, formulas and macros transform it, and the finished factsheet is generated for saving as final.',
+      'Worked with the product and sales teams to understand their manual checking process, then designed and built an AI checking app that went from prototype through development into production.',
+      'The app uses three AI agents (visual, period-on-period and raw data) that check independently, then reconcile with each other before giving one outcome.',
+      'Cut the teams’ checking time from about an hour to about five minutes per factsheet.',
     ],
   },
 ];
@@ -65,35 +65,37 @@ export type Project = {
 export const projects: Project[] = [
   {
     slug: 'client-report-automation',
-    title: 'Monthly client report automation',
-    summary: 'Raw data in, finished client report out, every month without anyone assembling it by hand.',
-    tags: ['Automation', 'Data pipelines', 'Reporting'],
+    title: 'Monthly factsheet automation',
+    summary: 'An Excel master file that turns raw data into a finished client factsheet with one click.',
+    tags: ['Excel', 'Macros', 'Automation', 'Reporting'],
     problem:
-      'Client reports had to be produced every month from raw data. Doing it manually meant repetitive work and room for error. [[Add how long it used to take.]]',
+      'Client factsheets had to be produced every month from data spread across Excel and Word files. Building them by hand was repetitive and easy to get wrong. [[Add how long it used to take.]]',
     approach: [
-      'Ingest the raw data from its sources. [[Name the sources.]]',
-      'Transform it: clean, standardise and validate the data so it is report-ready.',
-      'Generate the final client report automatically in its finished format.',
-      'Run the whole pipeline on a monthly schedule. [[Name the tools used.]]',
+      'A master file with a Raw data sheet: clicking Update pulls in all of the source data from the Excel and Word files.',
+      'A Transformation sheet of formulas and macros calculates everything the factsheet needs.',
+      'A dynamic named range feeds the results into the Output sheet, which builds the charts, tables, key figures and commentary.',
+      'The output is saved as the final factsheet, then passed on for checking.',
     ],
     outcome:
-      'Client reports are now generated automatically each month from raw data to final output. [[Add time saved or number of reports.]]',
+      'The monthly process became two steps for a person: click Update, then save as final. Everything in between is automatic. [[Add time saved or number of factsheets.]]',
   },
   {
     slug: 'ai-report-checker',
-    title: 'AI report-checking app',
-    summary: 'Three AI agents check each client report, compare notes, and return one clear verdict.',
-    tags: ['AI agents', 'App', 'Production'],
+    title: 'AI factsheet checker',
+    summary: 'Three AI agents check each factsheet, reconcile their findings, and return one clear outcome.',
+    tags: ['AI agents', 'Product', 'Production'],
     problem:
-      'Before a client report went out, the product and sales teams checked it by hand. Each check took about an hour.',
+      'Before a factsheet reached a client, the product and sales teams checked it by hand. Each check took about an hour.',
     approach: [
-      'Three separate AI agents each run their own individual checks on the report.',
-      'The agents then discuss with each other and compare notes before reaching a conclusion.',
-      'The app returns one finalised outcome: what is fine, what needs a look, and what needs fixing.',
-      'Took the app from development into production for the product and sales teams. [[Name the stack used.]]',
+      'Spent time with the product and sales teams to understand how they checked documents and where the time went.',
+      'Visual agent: checks spelling, formatting and layout, such as whether tables and charts are the right size.',
+      'Period agent: compares this period’s output with the previous period’s and judges whether each change is expected.',
+      'Raw data agent: checks the output against the raw data, so the transformation is correct and nothing is misstated.',
+      'The agents then question each other before reporting, which filters out false alarms. The app returns one list: fine, look at, fix.',
+      'Prototyped quickly with AI coding tools, refined it with the teams, and took it through development into production. [[Name the stack used.]]',
     ],
     outcome:
-      'Checking time dropped from about an hour to about five minutes per report, so the teams finish their checks far faster.',
+      'Checking time dropped from about an hour to about five minutes per factsheet.',
   },
 ];
 
