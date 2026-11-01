@@ -12,7 +12,7 @@ export const site = {
     "I'm finishing a Bachelor of Commerce in international business at Macquarie University and interning at Lazard Asset Management in Sydney, where I work across business analysis, data and business systems. I helped build around 200 Excel master files that cut monthly client reporting from two weeks to six days, and built an AI checking app, now in production, that cut factsheet checks from about an hour to about five minutes.",
   email: '', // add a public contact email to show it on the Contact page
   github: 'https://github.com/AdamQuinlan',
-  linkedin: '', // e.g. https://www.linkedin.com/in/your-profile
+  linkedin: 'https://www.linkedin.com/in/adam-quinlan-89a5012b7/',
   resumePdf: '', // e.g. /resume.pdf once the file is added to the public folder
   openTo: 'Graduate data engineering and data analyst roles',
 };
