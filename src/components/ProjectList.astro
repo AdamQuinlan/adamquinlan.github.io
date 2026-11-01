@@ -1,0 +1,41 @@
+---
+import type { Project } from '../data/site';
+interface Props { items: Project[] }
+const { items } = Astro.props;
+---
+<ol class="projects">
+  {items.map((p) => (
+    <li>
+      <a href={`/projects/${p.slug}`}>
+        <h3>{p.title}</h3>
+        <p>{p.summary}</p>
+        <ul class="tags">{p.tags.map((t) => <li>{t}</li>)}</ul>
+      </a>
+    </li>
+  ))}
+</ol>
+
+<style>
+  .projects { list-style: none; padding: 0; margin: 2rem 0 0; display: grid; gap: 0; }
+  .projects > li { border-top: 1px solid var(--line); }
+  .projects > li:last-child { border-bottom: 1px solid var(--line); }
+  .projects a {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr) 15rem;
+    gap: 0.5rem 2rem;
+    align-items: baseline;
+    padding: 1.5rem 0;
+    color: inherit;
+    text-decoration: none;
+  }
+  .projects h3 { margin: 0; }
+  .projects p { margin: 0; color: var(--muted); }
+  .projects a:hover h3 { color: var(--accent); }
+  .projects .tags { justify-content: flex-end; }
+  @media (max-width: 52rem) {
+    .projects .tags { justify-content: flex-start; }
+  }
+  @media (max-width: 52rem) {
+    .projects a { grid-template-columns: 1fr; }
+  }
+</style>

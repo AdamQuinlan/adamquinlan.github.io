@@ -1,0 +1,79 @@
+---
+// Hero illustration: business data flowing from messy sources
+// through a pipeline into the things people actually use.
+const sources = ['Sales system', 'Spreadsheets', 'CRM', 'APIs'];
+const stages = ['Ingest', 'Clean', 'Model'];
+const outputs = ['Dashboards', 'Internal apps', 'Decisions'];
+
+const W = 680;
+const srcX = 10, srcW = 132;
+const stageX0 = 200, stageGap = 118, stageW = 96;
+const outX = 548, outW = 122;
+const nodeH = 34;
+const midY = 150;
+
+const srcY = sources.map((_, i) => 48 + i * 68);
+const outY = outputs.map((_, i) => 82 + i * 68);
+const stageXs = stages.map((_, i) => stageX0 + i * stageGap);
+---
+<figure class="pipe" aria-label="Diagram: data from a sales system, spreadsheets, a CRM and APIs is ingested, cleaned and modelled, then feeds dashboards, internal apps and decisions.">
+  <svg viewBox={`0 0 ${W} 330`} role="img" aria-hidden="true">
+    {srcY.map((y) => (
+      <path class="edge" d={`M ${srcX + srcW} ${y} C ${stageX0 - 30} ${y}, ${stageX0 - 40} ${midY}, ${stageX0} ${midY}`} />
+    ))}
+    {stageXs.slice(0, -1).map((x) => (
+      <path class="edge" d={`M ${x + stageW} ${midY} L ${x + stageGap} ${midY}`} />
+    ))}
+    {outY.map((y) => (
+      <path class="edge out" d={`M ${stageXs[2] + stageW} ${midY} C ${outX - 30} ${midY}, ${outX - 40} ${y}, ${outX} ${y}`} />
+    ))}
+
+    {sources.map((s, i) => (
+      <g class="node src">
+        <rect x={srcX} y={srcY[i] - nodeH / 2} width={srcW} height={nodeH} rx="8" />
+        <text x={srcX + srcW / 2} y={srcY[i] + 5}>{s}</text>
+      </g>
+    ))}
+    {stages.map((s, i) => (
+      <g class="node stage">
+        <rect x={stageXs[i]} y={midY - 22} width={stageW} height="44" rx="22" />
+        <text x={stageXs[i] + stageW / 2} y={midY + 5}>{s}</text>
+      </g>
+    ))}
+    {outputs.map((s, i) => (
+      <g class="node outn">
+        <rect x={outX} y={outY[i] - nodeH / 2} width={outW} height={nodeH} rx="8" />
+        <text x={outX + outW / 2} y={outY[i] + 5}>{s}</text>
+      </g>
+    ))}
+  </svg>
+</figure>
+
+<style>
+  .pipe { margin: 0; }
+  svg { width: 100%; height: auto; display: block; overflow: visible; }
+  .edge {
+    fill: none; stroke: var(--line); stroke-width: 2;
+  }
+  .edge.out { stroke: var(--accent); stroke-opacity: 0.45; }
+  .node text {
+    font-family: var(--body); font-size: 13.5px; font-weight: 500;
+    text-anchor: middle; fill: var(--ink);
+  }
+  .src rect { fill: var(--surface); stroke: var(--line); stroke-width: 1.5; stroke-dasharray: 4 3; }
+  .src text { fill: var(--muted); }
+  .stage rect { fill: var(--ink); }
+  .stage text { fill: var(--bg); font-weight: 600; }
+  .outn rect { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 1.5; }
+  .outn text { fill: var(--accent); font-weight: 600; }
+
+  /* One orchestrated moment: data flows through once on load */
+  .edge {
+    stroke-dasharray: 6 8;
+    animation: flow 2.4s linear 1;
+  }
+  @keyframes flow {
+    from { stroke-dashoffset: 140; }
+    to { stroke-dashoffset: 0; }
+  }
+</style>

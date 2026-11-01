@@ -1,0 +1,66 @@
+---
+import Base from '../layouts/Base.astro';
+import { site, skills, fill } from '../data/site';
+---
+<Base title="About" description={site.intro}>
+  <section class="section">
+    <div class="wrap intro">
+      <h1>About me</h1>
+      <p class="lede">{site.intro}</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap two">
+      <div>
+        <h2>Two sides, one job</h2>
+      </div>
+      <div class="story">
+        <h3>The engineering side</h3>
+        <p>
+          In my internship I've moved between data engineering and analysis. I build the apps and
+          automations that collect data from different systems, clean it up and get it to the people who rely on it.
+        </p>
+        <h3>The business side</h3>
+        <p>
+          My Bachelor of Commerce, majoring in international business, taught me how organisations actually
+          operate: how decisions get made, how teams are managed, and how processes run across markets.
+          That context helps me design data systems around real business questions rather than just tables.
+        </p>
+        <h3>How I work</h3>
+        <p>
+          I like to understand the process before I automate it, talk to the people who use the output,
+          and keep pipelines simple enough that someone else can maintain them.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <h2>Skills</h2>
+      <dl class="skills">
+        {Object.entries(skills).map(([group, list]) => (
+          <div>
+            <dt>{group}</dt>
+            <dd><ul class="tags">{list.map((s) => <li set:html={fill(s)} />)}</ul></dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .intro h1 { max-width: 14ch; }
+  .two { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: 2rem 4rem; }
+  .story h3 { margin-top: 1.5rem; }
+  .story h3:first-child { margin-top: 0; }
+  .skills { display: grid; gap: 1.25rem; margin: 2rem 0 0; }
+  .skills > div { display: grid; grid-template-columns: 10rem 1fr; gap: 1rem; align-items: baseline; border-top: 1px solid var(--line); padding-top: 1.25rem; }
+  .skills dt { font-weight: 600; }
+  .skills dd { margin: 0; }
+  @media (max-width: 52rem) {
+    .two, .skills > div { grid-template-columns: 1fr; }
+  }
+</style>

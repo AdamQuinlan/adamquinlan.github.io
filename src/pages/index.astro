@@ -1,0 +1,85 @@
+---
+import Base from '../layouts/Base.astro';
+import Pipeline from '../components/Pipeline.astro';
+import ProjectList from '../components/ProjectList.astro';
+import { site, strengths, projects } from '../data/site';
+---
+<Base>
+  <section class="hero wrap">
+    <div class="copy">
+      <p class="hello">Hi, I'm {site.name.split(' ')[0]}, a {site.role.toLowerCase()}.</p>
+      <h1>{site.headline}</h1>
+      <div class="actions">
+        <a class="btn" href="/projects">See my work</a>
+        <a class="btn ghost" href="/contact">Get in touch</a>
+      </div>
+    </div>
+    <Pipeline />
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <h2>What I do</h2>
+      <div class="grid">
+        {strengths.map((s) => (
+          <div class="strength">
+            <h3>{s.title}</h3>
+            <p>{s.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="head">
+        <h2>Selected work</h2>
+        <a href="/projects">All projects</a>
+      </div>
+      <ProjectList items={projects.slice(0, 3)} />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap cta">
+      <h2>{site.openTo}</h2>
+      <p class="lede">If you're hiring for data engineering, I'd like to hear about the problems your team is working on.</p>
+      <a class="btn" href="/contact">Contact me</a>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .hero {
+    display: grid;
+    gap: clamp(2.5rem, 6vw, 4rem);
+    padding-top: clamp(3rem, 8vw, 6rem);
+    padding-bottom: clamp(3rem, 8vw, 5rem);
+  }
+  .hero :global(.pipe) { max-width: 52rem; }
+  .hello { color: var(--muted); font-weight: 500; margin-bottom: 1rem; }
+  .hero h1 { font-size: clamp(2rem, 4.6vw, 3.6rem); max-width: 24ch; }
+  .actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 2rem; }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 2rem 2.5rem;
+    margin-top: 2rem;
+  }
+  .strength { border-top: 3px solid var(--ink); padding-top: 1rem; }
+  .strength p { color: var(--muted); margin: 0; }
+
+  .head { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; flex-wrap: wrap; }
+
+  .cta { text-align: left; }
+  .cta .lede { margin-bottom: 1.75rem; }
+
+  @media (max-width: 60rem) {
+    .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (max-width: 36rem) {
+    .grid { grid-template-columns: 1fr; }
+  }
+</style>

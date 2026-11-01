@@ -1,0 +1,44 @@
+---
+import Base from '../layouts/Base.astro';
+import { site, fill } from '../data/site';
+
+const channels = [
+  site.email && { label: 'Email', value: site.email, href: `mailto:${site.email}` },
+  site.linkedin && { label: 'LinkedIn', value: 'Connect on LinkedIn', href: site.linkedin },
+  { label: 'GitHub', value: 'github.com/adamquinlana', href: site.github },
+].filter(Boolean) as { label: string; value: string; href: string }[];
+---
+<Base title="Contact" description={`Get in touch with ${site.name}.`}>
+  <section class="section">
+    <div class="wrap">
+      <h1>Let's talk</h1>
+      <p class="lede">
+        I'm looking for {site.openTo.toLowerCase()}. Recruiters, hiring managers and fellow
+        data people are all welcome to reach out.
+      </p>
+      <dl class="channels">
+        {channels.map((c) => (
+          <div>
+            <dt>{c.label}</dt>
+            <dd><a href={c.href}>{c.value}</a></dd>
+          </div>
+        ))}
+        <div>
+          <dt>Based in</dt>
+          <dd set:html={fill(site.location)} />
+        </div>
+      </dl>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .channels { margin: 2.5rem 0 0; max-width: 40rem; }
+  .channels > div {
+    display: grid; grid-template-columns: 6.5rem minmax(0, 1fr); gap: 1rem;
+    border-top: 1px solid var(--line); padding: 1.1rem 0;
+  }
+  .channels > div:last-child { border-bottom: 1px solid var(--line); }
+  dt { font-weight: 600; }
+  dd { margin: 0; font-size: var(--step-1); overflow-wrap: anywhere; }
+</style>
