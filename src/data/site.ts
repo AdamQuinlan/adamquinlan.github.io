@@ -7,33 +7,34 @@ export const site = {
   role: 'Data engineer',
   location: '[[City, Country]]',
   headline:
-    'I get to know a team, find what slows it down, and build the apps, automations and AI tools that make its work faster.',
+    'I learn how a team works, find what slows it down, and quickly build the automations and AI tools that make it faster.',
   intro:
-    "I'm a data engineer with a Bachelor of Commerce in international business. At Lazard Asset Management I automated monthly client factsheets and built an AI checking app, now in production, that cut checking time from about an hour to about five minutes.",
+    "I'm finishing a Bachelor of Commerce in international business at Macquarie University and interning at Lazard Asset Management, where I work across business analysis, data and business systems. I helped build around 200 Excel master files that cut monthly client reporting from two weeks to six days, and built an AI checking app, now in production, that cut factsheet checks from about an hour to about five minutes.",
   email: '', // add a public contact email to show it on the Contact page
   github: 'https://github.com/adamquinlana',
   linkedin: '', // e.g. https://www.linkedin.com/in/your-profile
   resumePdf: '', // e.g. /resume.pdf once the file is added to the public folder
-  openTo: 'Graduate and junior data engineering roles',
+  openTo: 'Graduate data engineering and data analyst roles',
 };
 
 export const skills = {
-  'Languages': ['Python', 'SQL', '[[add others]]'],
-  'Data and AI': ['Data pipelines', 'Report automation', 'Multi-agent AI workflows', '[[add tools, e.g. Airflow, dbt]]'],
-  'Platforms': ['[[e.g. Azure, AWS, Snowflake]]'],
-  'Business': ['Accounting and finance', 'Marketing', 'Economics', 'People and team management', 'Cross-cultural communication'],
+  'Data and automation': ['Excel master files', 'Formulas and macros', 'Dynamic named ranges', 'Built-in data checks', 'Report automation', '[[add others, e.g. SQL, Python, Power BI]]'],
+  'AI': ['Claude Code', 'Claude API (Sonnet)', 'Multi-agent workflows', 'Prompt design'],
+  'Platforms': ['Azure', 'Microsoft Excel', 'Microsoft Word'],
+  'Business': ['Business analysis', 'Stakeholder interviews', 'Accounting and finance', 'Marketing', 'Economics', 'People and team management', 'Cross-cultural communication'],
 };
 
 export const experience = [
   {
-    title: 'Data Engineering Intern',
+    title: 'Intern: business analysis, data and business systems',
     org: 'Lazard Asset Management',
     period: '[[Start month Year]] – Present',
     points: [
-      'Ran the monthly client reporting process and automated it with an Excel master file: one click pulls in the raw data, formulas and macros transform it, and the finished factsheet is generated for saving as final.',
-      'Worked with the product and sales teams to understand their manual checking process, then designed and built an AI checking app that went from prototype through development into production.',
-      'The app uses three AI agents (visual, period-on-period and raw data) that check independently, then reconcile with each other before giving one outcome.',
-      'Cut the teams’ checking time from about an hour to about five minutes per factsheet.',
+      'A combined business analyst, data analyst, business systems and data engineering role: talking to teams about what they need, building automation, running reports and handling ad hoc work.',
+      'Helped build a system of around 200 Excel master files that cut compiling the full line of monthly client reports from about two weeks to about six days, run by one person instead of two.',
+      'Built checks into each master file’s transformation, such as flagging unassigned securities and confirming weights total 100%.',
+      'Worked with the product and sales teams to understand their manual checking, then designed and built an AI checking app with Claude Code that went from prototype into production.',
+      'The app runs three Claude Sonnet agents (visual, period-on-period and raw data) that check independently, then reconcile before giving one outcome. Checking time fell from about an hour to about five minutes per factsheet.',
     ],
   },
 ];
@@ -41,8 +42,8 @@ export const experience = [
 export const education = [
   {
     title: 'Bachelor of Commerce, International Business',
-    org: '[[University name]]',
-    period: '[[Year – Year]]',
+    org: 'Macquarie University',
+    period: 'Graduating November 2026',
     points: [
       'Foundations across accounting, finance, marketing and economics.',
       'Culture and international business: how organisations operate across markets.',
@@ -66,24 +67,25 @@ export const projects: Project[] = [
   {
     slug: 'client-report-automation',
     title: 'Monthly factsheet automation',
-    summary: 'An Excel master file that turns raw data into a finished client factsheet with one click.',
-    tags: ['Excel', 'Macros', 'Automation', 'Reporting'],
+    summary: 'Around 200 Excel master files that turn raw data into finished client factsheets, cutting monthly reporting from two weeks to six days.',
+    tags: ['Excel', 'Macros', 'Automation', 'Team project'],
     problem:
-      'Client factsheets had to be produced every month from data spread across Excel and Word files. Building them by hand was repetitive and easy to get wrong. [[Add how long it used to take.]]',
+      'Every month, the full line of client reports had to be compiled from data spread across Excel and Word files. It took about two weeks of full-time work and needed two people.',
     approach: [
       'A master file with a Raw data sheet: clicking Update pulls in all of the source data from the Excel and Word files.',
       'A Transformation sheet of formulas and macros calculates everything the factsheet needs.',
+      'Checks are built into the transformation, such as flagging any unassigned securities and confirming weights total 100%.',
       'A dynamic named range feeds the results into the Output sheet, which builds the charts, tables, key figures and commentary.',
       'The output is saved as the final factsheet, then passed on for checking.',
     ],
     outcome:
-      'The monthly process became two steps for a person: click Update, then save as final. Everything in between is automatic. [[Add time saved or number of factsheets.]]',
+      'Our team built around 200 master files. Compiling the full line of reports now takes about six days (four full days and two part days waiting on data) instead of two weeks, it is run by one person instead of two, and it is far more reliable.',
   },
   {
     slug: 'ai-report-checker',
     title: 'AI factsheet checker',
     summary: 'Three AI agents check each factsheet, reconcile their findings, and return one clear outcome.',
-    tags: ['AI agents', 'Product', 'Production'],
+    tags: ['Claude Code', 'Claude API', 'AI agents', 'Production'],
     problem:
       'Before a factsheet reached a client, the product and sales teams checked it by hand. Each check took about an hour.',
     approach: [
@@ -92,7 +94,8 @@ export const projects: Project[] = [
       'Period agent: compares this period’s output with the previous period’s and judges whether each change is expected.',
       'Raw data agent: checks the output against the raw data, so the transformation is correct and nothing is misstated.',
       'The agents then question each other before reporting, which filters out false alarms. The app returns one list: fine, look at, fix.',
-      'Prototyped quickly with AI coding tools, refined it with the teams, and took it through development into production. [[Name the stack used.]]',
+      'Built with Claude Code. The agents run on Claude Sonnet through the Claude API, connected via Azure, and I used Claude to sharpen each agent’s prompts.',
+      'Prototyped quickly, refined it with the teams, and took it through development into production.',
     ],
     outcome:
       'Checking time dropped from about an hour to about five minutes per factsheet.',

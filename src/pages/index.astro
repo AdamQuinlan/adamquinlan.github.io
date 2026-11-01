@@ -26,8 +26,8 @@ const way = [
   {
     short: 'Prototype',
     title: 'Build a prototype fast',
-    body: 'Using AI coding tools like Claude Code, I get a working version in front of the team quickly, so they react to something real.',
-    eg: 'A first version of the checker, tested on real factsheets.',
+    body: 'With Claude Code, I get a working version in front of the team quickly, so they react to something real instead of a slide.',
+    eg: 'A first checker built with Claude Code, running Claude Sonnet agents on real factsheets.',
   },
   {
     short: 'Refine',
@@ -136,7 +136,7 @@ const w = (t: string, fs: number) => Math.round(t.length * fs * 0.56 + 28);
             </div>
             <div class="cap" data-at="1">
               <h2>Formulas and macros do the work.</h2>
-              <p>The Transformation sheet calculates everything the report needs, and a dynamic named range passes the results through to the output.</p>
+              <p>The Transformation sheet calculates everything the report needs and checks itself: nothing left unassigned, weights adding to 100%. A dynamic named range passes the results to the output.</p>
             </div>
             <div class="cap" data-at="2">
               <h2>The factsheet builds itself.</h2>
@@ -200,6 +200,7 @@ const w = (t: string, fs: number) => Math.round(t.length * fs * 0.56 + 28);
                 </table>
                 <p class="named">Named range <b>Output_Sectors</b> resizes automatically as data changes</p>
                 <p class="macro">Macro <b>BuildCharts</b> refreshes every chart on the Output sheet</p>
+                <p class="checks">Checks: unassigned securities <b>0</b>, weights total <b>100.0%</b></p>
               </div>
 
               <div class="sheet out" data-from="2">
@@ -221,6 +222,21 @@ const w = (t: string, fs: number) => Math.round(t.length * fs * 0.56 + 28);
               <span class="tab" data-from="2">Output</span>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Automation results -->
+  <section class="scene light scale" data-scene data-steps="1" aria-label="Results of the master file system">
+    <div class="pin">
+      <div class="wrap scale-wrap">
+        <p class="kicker">Scaled across the team</p>
+        <h2 class="scale-title">One master file became a system.</h2>
+        <div class="scale-stats">
+          <div><p class="sv"><span data-count-from="0" data-count-to="200">200</span></p><p class="sl">master files built by our team for the monthly client reports</p></div>
+          <div><p class="sv">2 wks <span class="to">to</span> 6 days</p><p class="sl">to compile the full line of monthly client reports</p></div>
+          <div><p class="sv">2 <span class="to">to</span> 1</p><p class="sl">people needed to run it, with built-in checks making it far more reliable</p></div>
         </div>
       </div>
     </div>
@@ -393,7 +409,7 @@ const w = (t: string, fs: number) => Math.round(t.length * fs * 0.56 + 28);
   <section class="close">
     <div class="wrap">
       <h2>Every team has a process that could run faster.</h2>
-      <p>I'm looking for {site.openTo.toLowerCase()} where I can find those processes and build what fixes them.</p>
+      <p>I learn fast, I'm curious about how teams work, and I like turning a slow process into a fast one. I'm looking for {site.openTo.toLowerCase()} where I can keep doing that.</p>
       <div class="hero-actions center">
         <a class="btn light" href="/contact">Get in touch</a>
         <a class="btn ghost light" href="/projects">Read the project write-ups</a>
