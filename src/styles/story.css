@@ -358,6 +358,19 @@
 .wnode.core text { fill: #fff; font-size: 16px; font-weight: 700; }
 .wnode.core text.sub { fill: #a1a1a6; font-size: 12.5px; font-weight: 500; }
 
+/* ---------- What I bring ---------- */
+.offer-head { text-align: center; }
+.offer-head h2 { font-size: clamp(2rem, 4.4vw, 3.5rem); font-weight: 750; }
+.offer-grid { list-style: none; margin: 2.25rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+.offer-grid li {
+  background: #fff; border-radius: 18px; padding: 1.25rem 1.35rem;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.06);
+  opacity: clamp(0, calc((var(--pe, 1) - var(--d)) * 4), 1);
+  transform: translateY(calc((1 - clamp(0, calc((var(--pe, 1) - var(--d)) * 4), 1)) * 18px));
+}
+.offer-grid h3 { font-size: 1.15rem; margin-bottom: 0.4rem; }
+.offer-grid p { color: var(--muted); font-size: 0.9rem; margin: 0; }
+
 /* ---------- Small screens ---------- */
 @media (max-width: 52rem) {
   .pin-grid, .check-layout, .biz-grid { grid-template-columns: 1fr; gap: 1.1rem; }
@@ -398,6 +411,11 @@
   .verdict li { font-size: 0.72rem; padding: 0.3rem 0; }
 
   .scene.stat .pin, .scene.scale .pin { align-items: center; }
+  .offer-grid { grid-template-columns: 1fr; gap: 0.5rem; margin-top: 1rem; }
+  .offer-grid li { padding: 0.7rem 0.9rem; border-radius: 14px; }
+  .offer-grid h3 { font-size: 0.95rem; margin-bottom: 0.15rem; }
+  .offer-grid p { font-size: 0.76rem; line-height: 1.4; }
+  .offer-head h2 { font-size: clamp(1.6rem, 7vw, 2.2rem); margin-bottom: 0; }
   .scale-stats { grid-template-columns: 1fr; gap: 1.4rem; margin-top: 1.5rem; }
   .sl { margin-top: 0.4rem; font-size: 0.92rem; }
 }

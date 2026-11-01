@@ -108,3 +108,51 @@ export function fill(text: string): string {
   const escaped = text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
   return escaped.replace(/\[\[(.+?)\]\]/g, '<span class="todo">$1</span>');
 }
+
+// ---------- "What I bring" (the pitch to an employer) ----------
+
+export const proof = [
+  { value: '2 wks → 6 days', label: 'monthly client reporting, after automating it' },
+  { value: '60 → 5 min', label: 'to check a factsheet, using AI agents I built' },
+  { value: '2 → 1', label: 'people needed to run the reporting process' },
+  { value: '200', label: 'master files in the system our team built' },
+];
+
+export const offers = [
+  {
+    title: 'Find where your team loses time',
+    body: 'I learn how your people actually work, then pinpoint the manual, repetitive steps that slow them down and what they cost.',
+    proof: 'Mapped how product and sales checked factsheets before building anything.',
+  },
+  {
+    title: 'Automate the repetitive work',
+    body: 'Reporting, data preparation and recurring processes, rebuilt so they run reliably with a click instead of days of effort.',
+    proof: 'Monthly client reporting went from two weeks to six days, run by one person instead of two.',
+  },
+  {
+    title: 'Put AI to practical use',
+    body: 'Not AI for its own sake. I find the tasks where it genuinely saves time and build tools people trust and use every day.',
+    proof: 'A three-agent Claude checker, now in production, cut checks from an hour to five minutes.',
+  },
+  {
+    title: 'Build reliability in',
+    body: 'Faster is only useful if it’s right. I build checks into processes so errors are caught before anyone else sees them.',
+    proof: 'Master files check that nothing is unassigned and weights total 100%. The AI agents cross-check each other.',
+  },
+  {
+    title: 'Bridge business and tech',
+    body: 'With a commerce background, I can talk to sales, product and finance in their language and turn what they need into something buildable.',
+    proof: 'Worked directly with product and sales teams to design the checker around their workflow.',
+  },
+  {
+    title: 'Learn fast and deliver',
+    body: 'I pick up new tools quickly and get working versions in front of people early, so the team sees value early.',
+    proof: 'As an intern, took an AI app from idea to production. Now building my SQL and Python skills.',
+  },
+];
+
+export const startPlan = [
+  { when: 'First', title: 'Listen and map', body: 'Sit with your team, learn the processes, and find where time and accuracy are being lost.' },
+  { when: 'Next', title: 'Deliver a quick win', body: 'Pick one high-value bottleneck and ship a working fix, so the team sees results early.' },
+  { when: 'Then', title: 'Scale what works', body: 'Extend it to similar processes, document it, and make sure the team can run it without me.' },
+];

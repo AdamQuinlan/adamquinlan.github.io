@@ -1,7 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import Factsheet from '../components/Factsheet.astro';
-import { site } from '../data/site';
+import { site, offers } from '../data/site';
 import '../styles/story.css';
 
 const way = [
@@ -405,14 +405,34 @@ const w = (t: string, fs: number) => Math.round(t.length * fs * 0.56 + 28);
     </div>
   </section>
 
+  <!-- What I can do for you -->
+  <section class="scene light offer-scene" data-scene data-steps="1" aria-label="What I can do for your team">
+    <div class="pin">
+      <div class="wrap">
+        <div class="offer-head">
+          <p class="kicker">What I bring</p>
+          <h2>What I can do for your team.</h2>
+        </div>
+        <ol class="offer-grid">
+          {offers.map((o, i) => (
+            <li style={`--d:${(i * 0.09).toFixed(2)}`}>
+              <h3>{o.title}</h3>
+              <p>{o.proof}</p>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </div>
+  </section>
+
   <!-- Close -->
   <section class="close">
     <div class="wrap">
       <h2>Every team has a process that could run faster.</h2>
       <p>I learn fast, I'm curious about how teams work, and I like turning a slow process into a fast one. I'm looking for {site.openTo.toLowerCase()} where I can keep doing that.</p>
       <div class="hero-actions center">
-        <a class="btn light" href="/contact">Get in touch</a>
-        <a class="btn ghost light" href="/projects">Read the project write-ups</a>
+        <a class="btn light" href="/what-i-bring">See what I can do for you</a>
+        <a class="btn ghost light" href="/contact">Get in touch</a>
       </div>
     </div>
   </section>
