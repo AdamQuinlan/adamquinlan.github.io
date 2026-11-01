@@ -7,9 +7,9 @@ export const site = {
   role: 'Data engineer',
   location: '[[City, Country]]',
   headline:
-    'I build the pipelines, automations and internal apps that turn scattered business data into something people can act on.',
+    'I build the pipelines, automations and AI-powered apps that turn raw business data into finished, checked output.',
   intro:
-    "I'm a data engineer with a Bachelor of Commerce in international business. I work across both sides of the table: building the systems that move and clean data, and understanding the business questions that data is meant to answer.",
+    "I'm a data engineer with a Bachelor of Commerce in international business. In my internship I automated monthly client reporting end to end and built an AI app, now in production, that cut report checking from about an hour to about five minutes.",
   email: '', // add a public contact email to show it on the Contact page
   github: 'https://github.com/adamquinlana',
   linkedin: '', // e.g. https://www.linkedin.com/in/your-profile
@@ -17,30 +17,11 @@ export const site = {
   openTo: 'Graduate and junior data engineering roles',
 };
 
-export const strengths = [
-  {
-    title: 'Data pipelines',
-    body: 'Extracting data from source systems, cleaning and transforming it, and loading it somewhere reliable for reporting.',
-  },
-  {
-    title: 'Automation',
-    body: 'Replacing manual, repetitive processes with scheduled jobs and scripts so teams spend time on decisions, not copy-paste.',
-  },
-  {
-    title: 'Internal apps',
-    body: 'Small, focused tools that put the right data in front of the people who need it.',
-  },
-  {
-    title: 'Business context',
-    body: 'A commerce degree in international business means I start from how the organisation actually runs, not just the schema.',
-  },
-];
-
 export const skills = {
   'Languages': ['Python', 'SQL', '[[add others]]'],
-  'Data tools': ['[[e.g. Airflow, dbt, Power BI]]'],
+  'Data and AI': ['Data pipelines', 'Report automation', 'Multi-agent AI workflows', '[[add tools, e.g. Airflow, dbt]]'],
   'Platforms': ['[[e.g. Azure, AWS, Snowflake]]'],
-  'Business': ['Process analysis', 'Stakeholder communication', 'Team collaboration', 'International business'],
+  'Business': ['Accounting and finance', 'Marketing', 'Economics', 'People and team management', 'Cross-cultural communication'],
 };
 
 export const experience = [
@@ -49,9 +30,10 @@ export const experience = [
     org: '[[Company name]]',
     period: '[[Start month Year]] – Present',
     points: [
-      'Build data applications and automation processes for internal teams.',
-      'Work across data engineering and analysis: sourcing, transforming and reporting on business data.',
-      '[[Add a result with a number, e.g. "Cut a weekly reporting task from 4 hours to 10 minutes."]]',
+      'Automated monthly client reporting end to end: raw data is ingested, transformed and turned into a finished report on a monthly schedule.',
+      'Ran the monthly client reports for the business and maintained the automation behind them.',
+      'Built an AI report-checking app, taken from development into production, where three AI agents check each report independently and then compare notes to produce one outcome.',
+      'Cut the product and sales teams’ checking time from about an hour to about five minutes per report.',
     ],
   },
 ];
@@ -62,8 +44,9 @@ export const education = [
     org: '[[University name]]',
     period: '[[Year – Year]]',
     points: [
-      'Studied how businesses operate across markets: strategy, operations, management and finance.',
-      'Extensive team-based project work and people management coursework.',
+      'Foundations across accounting, finance, marketing and economics.',
+      'Culture and international business: how organisations operate across markets.',
+      'People and team management, and extensive team-based project work.',
     ],
   },
 ];
@@ -81,43 +64,36 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    slug: 'reporting-automation',
-    title: 'Automated reporting pipeline',
-    summary: 'Replaced a manual reporting process with a scheduled pipeline that pulls, cleans and publishes the data on its own.',
-    tags: ['Automation', 'Python', 'SQL'],
+    slug: 'client-report-automation',
+    title: 'Monthly client report automation',
+    summary: 'Raw data in, finished client report out, every month without anyone assembling it by hand.',
+    tags: ['Automation', 'Data pipelines', 'Reporting'],
     problem:
-      '[[Describe the manual process: who did it, how often, and why it was slow or error-prone.]]',
+      'Client reports had to be produced every month from raw data. Doing it manually meant repetitive work and room for error. [[Add how long it used to take.]]',
     approach: [
-      '[[Where the data came from (systems, files, APIs).]]',
-      '[[How it was cleaned and transformed.]]',
-      '[[Where it lands and how it is scheduled.]]',
+      'Ingest the raw data from its sources. [[Name the sources.]]',
+      'Transform it: clean, standardise and validate the data so it is report-ready.',
+      'Generate the final client report automatically in its finished format.',
+      'Run the whole pipeline on a monthly schedule. [[Name the tools used.]]',
     ],
-    outcome: '[[What changed: hours saved, errors removed, who now uses it.]]',
+    outcome:
+      'Client reports are now generated automatically each month from raw data to final output. [[Add time saved or number of reports.]]',
   },
   {
-    slug: 'internal-data-app',
-    title: 'Internal data app',
-    summary: 'An internal tool that gives a team self-serve access to the data they used to request by email.',
-    tags: ['App', 'Data modelling'],
-    problem: '[[What the team was struggling with before the app existed.]]',
+    slug: 'ai-report-checker',
+    title: 'AI report-checking app',
+    summary: 'Three AI agents check each client report, compare notes, and return one clear verdict.',
+    tags: ['AI agents', 'App', 'Production'],
+    problem:
+      'Before a client report went out, the product and sales teams checked it by hand. Each check took about an hour.',
     approach: [
-      '[[The stack you used to build it.]]',
-      '[[The key screens or features.]]',
-      '[[How you worked with the users to shape it.]]',
+      'Three separate AI agents each run their own individual checks on the report.',
+      'The agents then discuss with each other and compare notes before reaching a conclusion.',
+      'The app returns one finalised outcome: what is fine, what needs a look, and what needs fixing.',
+      'Took the app from development into production for the product and sales teams. [[Name the stack used.]]',
     ],
-    outcome: '[[Adoption, time saved, or decisions it enabled.]]',
-  },
-  {
-    slug: 'business-analysis',
-    title: 'From business question to data model',
-    summary: 'A university or work project where business understanding shaped the data design.',
-    tags: ['Analysis', 'Business systems'],
-    problem: '[[The business question or case you were working on.]]',
-    approach: [
-      '[[How you broke the problem down.]]',
-      '[[The data or model you built to answer it.]]',
-    ],
-    outcome: '[[What you recommended and what happened next.]]',
+    outcome:
+      'Checking time dropped from about an hour to about five minutes per report, so the teams finish their checks far faster.',
   },
 ];
 
