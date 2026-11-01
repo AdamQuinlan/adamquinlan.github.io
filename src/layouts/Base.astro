@@ -59,7 +59,7 @@ const nav = [
       <div class="wrap foot">
         <p>{site.name}, {site.role}</p>
         <ul>
-          <li><a href={site.github}>GitHub</a></li>
+          <li><a href={`mailto:${site.email}`}>Email</a></li>
           {site.linkedin && <li><a href={site.linkedin}>LinkedIn</a></li>}
           <li><a href="/contact">Get in touch</a></li>
         </ul>

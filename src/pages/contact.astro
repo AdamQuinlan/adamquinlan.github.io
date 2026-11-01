@@ -5,7 +5,6 @@ import { site, fill } from '../data/site';
 const channels = [
   site.email && { label: 'Email', value: site.email, href: `mailto:${site.email}` },
   site.linkedin && { label: 'LinkedIn', value: 'Connect on LinkedIn', href: site.linkedin },
-  { label: 'GitHub', value: 'github.com/AdamQuinlan', href: site.github },
 ].filter(Boolean) as { label: string; value: string; href: string }[];
 ---
 <Base title="Contact" description={`Get in touch with ${site.name}.`}>

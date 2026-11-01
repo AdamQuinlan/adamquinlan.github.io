@@ -10,7 +10,7 @@ export const site = {
     'I learn how a team works, find what slows it down, and quickly build the automations and AI tools that make it faster.',
   intro:
     "I'm finishing a Bachelor of Commerce in international business at Macquarie University and interning at Lazard Asset Management in Sydney, where I work across business analysis, data and business systems. I helped build around 200 Excel master files that cut monthly client reporting from two weeks to six days, and built an AI checking app, now in production, that cut factsheet checks from about an hour to about five minutes.",
-  email: '', // add a public contact email to show it on the Contact page
+  email: 'adamquinlana@gmail.com',
   github: 'https://github.com/AdamQuinlan',
   linkedin: 'https://www.linkedin.com/in/adam-quinlan-89a5012b7/',
   resumePdf: '', // e.g. /resume.pdf once the file is added to the public folder
