@@ -1,4 +1,4 @@
-# adamquinlana.github.io
+# adamquinlan.github.io
 
 Personal portfolio site, built with [Astro](https://astro.build) and published on GitHub Pages.
 
@@ -14,7 +14,7 @@ Text wrapped in `[[double brackets]]` is a placeholder and shows with a dashed h
 ## Publishing
 
 Every push to `main` runs `.github/workflows/deploy.yml`, which builds the site and publishes it to
-https://adamquinlana.github.io. One-time setup: in the repository's Settings → Pages, set Source to **GitHub Actions**.
+https://adamquinlan.github.io. One-time setup: in the repository's Settings → Pages, set Source to **GitHub Actions**.
 
 ## Running locally (optional)
 

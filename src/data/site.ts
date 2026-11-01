@@ -5,22 +5,23 @@
 export const site = {
   name: 'Adam Quinlan',
   role: 'Data engineer',
-  location: '[[City, Country]]',
+  location: 'Sydney, Australia',
   headline:
     'I learn how a team works, find what slows it down, and quickly build the automations and AI tools that make it faster.',
   intro:
-    "I'm finishing a Bachelor of Commerce in international business at Macquarie University and interning at Lazard Asset Management, where I work across business analysis, data and business systems. I helped build around 200 Excel master files that cut monthly client reporting from two weeks to six days, and built an AI checking app, now in production, that cut factsheet checks from about an hour to about five minutes.",
+    "I'm finishing a Bachelor of Commerce in international business at Macquarie University and interning at Lazard Asset Management in Sydney, where I work across business analysis, data and business systems. I helped build around 200 Excel master files that cut monthly client reporting from two weeks to six days, and built an AI checking app, now in production, that cut factsheet checks from about an hour to about five minutes.",
   email: '', // add a public contact email to show it on the Contact page
-  github: 'https://github.com/adamquinlana',
+  github: 'https://github.com/AdamQuinlan',
   linkedin: '', // e.g. https://www.linkedin.com/in/your-profile
   resumePdf: '', // e.g. /resume.pdf once the file is added to the public folder
   openTo: 'Graduate data engineering and data analyst roles',
 };
 
 export const skills = {
-  'Data and automation': ['Excel master files', 'Formulas and macros', 'Dynamic named ranges', 'Built-in data checks', 'Report automation', '[[add others, e.g. SQL, Python, Power BI]]'],
+  'Data and automation': ['Excel master files', 'Formulas and macros', 'Dynamic named ranges', 'Built-in data checks', 'Report automation'],
+  'Currently learning': ['SQL', 'Python'],
   'AI': ['Claude Code', 'Claude API (Sonnet)', 'Multi-agent workflows', 'Prompt design'],
-  'Platforms': ['Azure', 'Microsoft Excel', 'Microsoft Word'],
+  'Platforms': ['Azure', 'Microsoft Excel', 'Microsoft Word', 'Coda'],
   'Business': ['Business analysis', 'Stakeholder interviews', 'Accounting and finance', 'Marketing', 'Economics', 'People and team management', 'Cross-cultural communication'],
 };
 
@@ -28,7 +29,7 @@ export const experience = [
   {
     title: 'Intern: business analysis, data and business systems',
     org: 'Lazard Asset Management',
-    period: '[[Start month Year]] – Present',
+    period: 'March 2026 – January 2027',
     points: [
       'A combined business analyst, data analyst, business systems and data engineering role: talking to teams about what they need, building automation, running reports and handling ad hoc work.',
       'Helped build a system of around 200 Excel master files that cut compiling the full line of monthly client reports from about two weeks to about six days, run by one person instead of two.',
