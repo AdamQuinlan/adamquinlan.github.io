@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
 import { site, fill } from '../data/site';
 
 const channels = [
@@ -8,13 +9,14 @@ const channels = [
 ].filter(Boolean) as { label: string; value: string; href: string }[];
 ---
 <Base title="Contact" description={`Get in touch with ${site.name}.`}>
+  <PageHero title="Let's talk" kicker="Get in touch" art="contact">
+    <p class="lede">
+      I'm looking for {site.openTo.toLowerCase()}. Recruiters, hiring managers and fellow
+      data people are all welcome to reach out.
+    </p>
+  </PageHero>
   <section class="section">
     <div class="wrap">
-      <h1>Let's talk</h1>
-      <p class="lede">
-        I'm looking for {site.openTo.toLowerCase()}. Recruiters, hiring managers and fellow
-        data people are all welcome to reach out.
-      </p>
       <dl class="channels">
         {channels.map((c) => (
           <div>
@@ -32,7 +34,7 @@ const channels = [
 </Base>
 
 <style>
-  .channels { margin: 2.5rem 0 0; max-width: 40rem; }
+  .channels { margin: 0; max-width: 40rem; }
   .channels > div {
     display: grid; grid-template-columns: 6.5rem minmax(0, 1fr); gap: 1rem;
     border-top: 1px solid var(--line); padding: 1.1rem 0;

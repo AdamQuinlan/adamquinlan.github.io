@@ -1,13 +1,15 @@
 ---
 import Base from '../../layouts/Base.astro';
 import ProjectList from '../../components/ProjectList.astro';
+import PageHero from '../../components/PageHero.astro';
 import { projects } from '../../data/site';
 ---
 <Base title="Projects" description="Data engineering, automation and internal app projects.">
+  <PageHero title="Projects" kicker="Built at Lazard Asset Management" art="projects">
+    <p class="lede">Automations and AI tools I've built, and the business problems behind them.</p>
+  </PageHero>
   <section class="section">
     <div class="wrap">
-      <h1>Projects</h1>
-      <p class="lede">Pipelines, automations and apps I've built, and the business problems behind them.</p>
       <ProjectList items={projects} />
     </div>
   </section>

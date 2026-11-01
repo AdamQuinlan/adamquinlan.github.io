@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
 import { site, experience, education, fill } from '../data/site';
 
 const sections = [
@@ -8,12 +9,12 @@ const sections = [
 ];
 ---
 <Base title="Experience" description="Work experience and education.">
-  <section class="section">
+  <PageHero title="Experience" kicker="Where I've been, where I'm heading" art="experience">
+    <p class="lede">An internship at Lazard Asset Management alongside a Bachelor of Commerce at Macquarie University.</p>
+    {site.resumePdf && <p class="dl"><a class="btn ghost" href={site.resumePdf}>Download résumé (PDF)</a></p>}
+  </PageHero>
+  <section class="section first">
     <div class="wrap">
-      <div class="top">
-        <h1>Experience</h1>
-        {site.resumePdf && <a class="btn ghost" href={site.resumePdf}>Download résumé (PDF)</a>}
-      </div>
 
       {sections.map((s) => (
         <section class="block">
@@ -38,6 +39,8 @@ const sections = [
 
 <style>
   .top { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+  .first { padding-top: 1rem; }
+  .dl { margin-top: 1.5rem; }
   .block { margin-top: 3rem; }
   .block h2 { font-size: var(--step-2); }
   .timeline { list-style: none; padding: 0; margin: 1rem 0 0; }

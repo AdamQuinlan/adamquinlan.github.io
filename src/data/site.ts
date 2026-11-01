@@ -18,11 +18,11 @@ export const site = {
 };
 
 export const skills = {
-  'Data and automation': ['Excel master files', 'Formulas and macros', 'Dynamic named ranges', 'Built-in data checks', 'Report automation'],
+  'Data and automation': ['Excel automation', 'Excel formulas and VBA macros', 'Dynamic named ranges', 'Built-in data checks', 'Report automation'],
   'Currently learning': ['SQL', 'Python'],
-  'AI': ['Claude Code', 'Claude API (Sonnet)', 'Multi-agent workflows', 'Prompt design'],
-  'Platforms': ['Azure', 'Microsoft Excel', 'Microsoft Word', 'Coda'],
-  'Business': ['Business analysis', 'Stakeholder interviews', 'Accounting and finance', 'Marketing', 'Economics', 'People and team management', 'Cross-cultural communication'],
+  'AI': ['Claude Code', 'Multi-agent workflows', 'Prompt design', 'AI app design'],
+  'Platforms': ['Azure', 'Microsoft Office', 'Coder'],
+  'Business': ['Business analysis', 'Accounting and finance', 'Marketing', 'Economics', 'People and team management', 'Cross-cultural communication'],
 };
 
 export const experience = [

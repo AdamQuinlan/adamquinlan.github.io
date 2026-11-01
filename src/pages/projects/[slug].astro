@@ -1,5 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
 import { projects, fill, type Project } from '../../data/site';
 
 export function getStaticPaths() {
@@ -9,12 +10,13 @@ export function getStaticPaths() {
 const { project } = Astro.props as { project: Project };
 ---
 <Base title={project.title} description={project.summary}>
+  <PageHero title={project.title} kicker="Project" art={project.slug === 'ai-report-checker' ? 'checker' : 'automation'}>
+    <p class="lede">{project.summary}</p>
+    <ul class="tags">{project.tags.map((t) => <li>{t}</li>)}</ul>
+  </PageHero>
   <article class="section">
     <div class="wrap">
       <a class="back" href="/projects">All projects</a>
-      <h1>{project.title}</h1>
-      <p class="lede">{project.summary}</p>
-      <ul class="tags">{project.tags.map((t) => <li>{t}</li>)}</ul>
 
       <div class="body">
         <section>
@@ -42,9 +44,8 @@ const { project } = Astro.props as { project: Project };
 
 <style>
   .back { display: inline-block; margin-bottom: 1.5rem; font-weight: 500; }
-  h1 { font-size: var(--step-4); max-width: 18ch; }
-  .tags { margin-top: 1rem; }
-  .body { margin-top: 3rem; display: grid; gap: 2.5rem; max-width: 46rem; }
+:global(.ph) .tags { margin-top: 1.25rem; }
+  .body { margin-top: 1rem; display: grid; gap: 2.5rem; max-width: 46rem; }
   .body h2 { font-size: var(--step-2); }
   .steps { padding-left: 1.2rem; margin: 0; }
   .steps li { margin-bottom: 0.5rem; }
