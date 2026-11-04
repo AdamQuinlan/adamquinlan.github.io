@@ -1,7 +1,16 @@
 ---
 import Base from '../layouts/Base.astro';
 import Factsheet from '../components/Factsheet.astro';
-import { site, offers } from '../data/site';
+import { site, offers, proof, strengths, hubLinks, facts } from '../data/site';
+
+const icon: Record<string, string> = {
+  person: '<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>',
+  grid: '<rect x="3" y="3" width="8" height="8" rx="2"/><rect x="13" y="3" width="8" height="8" rx="2"/><rect x="3" y="13" width="8" height="8" rx="2"/><rect x="13" y="13" width="8" height="8" rx="2"/>',
+  path: '<circle cx="5" cy="18" r="2"/><circle cx="19" cy="6" r="2"/><path d="M7 18h6a3 3 0 0 0 0-6h-2a3 3 0 0 1 0-6h6"/>',
+  spark: '<path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M6 18l2.5-2.5M15.5 8.5 18 6"/>',
+  mail: '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/>',
+};
+const currently = facts.filter((f) => ['Now', 'Studying', 'Graduating', 'Learning'].includes(f.label));
 import '../styles/story.css';
 
 const way = [
@@ -86,19 +95,80 @@ const w = (t: string, fs: number) => Math.round(t.length * fs * 0.56 + 28);
   <!-- Hero -->
   <section class="hero">
     <div class="wrap">
-      <p class="hero-hi">{site.name}</p>
+      <p class="hero-hi">{site.name} <span class="hero-pill">Sydney · Graduating November 2026</span></p>
       <h1 class="hero-title">Data engineer.<br /><span class="dim">Business thinker.</span></h1>
       <p class="hero-sub">{site.headline}</p>
       <div class="hero-actions">
-        <a class="btn" href="#how-i-work">See how I work</a>
+        <a class="btn" href="#overview">Get the overview</a>
         <a class="btn ghost" href="/contact">Get in touch</a>
       </div>
     </div>
-    <p class="scroll-cue" aria-hidden="true">Scroll</p>
+    <a class="scroll-cue" href="#overview">Scroll</a>
+  </section>
+
+  <!-- Overview hub -->
+  <section class="hub" id="overview" aria-labelledby="hub-title">
+    <div class="wrap">
+      <p class="kicker">At a glance</p>
+      <h2 id="hub-title" class="hub-title">Hi, I'm Adam.</h2>
+      <div class="hub-grid">
+        <div class="hub-about">
+          <p class="hub-lede">
+            I'm a final-year Bachelor of Commerce student at Macquarie University and an intern at
+            Lazard Asset Management in Sydney. My role mixes business analysis, data analysis,
+            business systems and data engineering.
+          </p>
+          <p>
+            In practice that means I talk to teams about what slows them down, then build the
+            automation and AI tools that fix it. I helped build the Excel system that cut monthly
+            client reporting from two weeks to six days, and I built an AI app, now in production,
+            that checks each factsheet in five minutes instead of an hour.
+          </p>
+          <h3 class="hub-h3">What I'm good at</h3>
+          <ul class="good">
+            {strengths.map((g) => <li><b>{g.title}</b><span>{g.body}</span></li>)}
+          </ul>
+        </div>
+        <aside class="now-card" aria-label="Right now">
+          <p class="now-title"><span class="live" aria-hidden="true"></span>Right now</p>
+          <dl>
+            {currently.map((f) => <div><dt>{f.label}</dt><dd>{f.value}</dd></div>)}
+          </dl>
+          <div class="now-actions">
+            <a class="btn" href={`mailto:${site.email}`}>Email me</a>
+            <a class="btn ghost" href={site.linkedin}>LinkedIn</a>
+          </div>
+        </aside>
+      </div>
+
+      <ul class="hub-proof" aria-label="Results">
+        {proof.map((p) => <li><b>{p.value}</b><span>{p.label}</span></li>)}
+      </ul>
+
+      <h3 class="hub-h3 explore-title">Explore</h3>
+      <ul class="explore">
+        {hubLinks.map((l) => (
+          <li>
+            <a href={l.href}>
+              <svg viewBox="0 0 24 24" aria-hidden="true" set:html={icon[l.icon]} />
+              <b>{l.title}</b>
+              <span>{l.body}</span>
+            </a>
+          </li>
+        ))}
+        <li>
+          <a href="#how-i-work" class="story-link">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v16M6 14l6 6 6-6" /></svg>
+            <b>The full story</b>
+            <span>Keep scrolling to see the work in motion.</span>
+          </a>
+        </li>
+      </ul>
+    </div>
   </section>
 
   <!-- Chapter 1: how I work with a team -->
-  <section class="scene light way" id="how-i-work" data-scene data-steps="6" aria-label="How I work with a team">
+  <section class="scene light way" id="how-i-work" data-scene data-steps="6" data-ms="3200" aria-label="How I work with a team">
     <div class="pin">
       <div class="wrap way-wrap">
         <p class="kicker">How I work</p>
@@ -124,7 +194,7 @@ const w = (t: string, fs: number) => Math.round(t.length * fs * 0.56 + 28);
   </section>
 
   <!-- Chapter 2: the master file -->
-  <section class="scene light master" id="automation" data-scene data-steps="4" aria-label="Automating monthly client factsheets">
+  <section class="scene light master" id="automation" data-scene data-steps="4" data-ms="3200" aria-label="Automating monthly client factsheets">
     <div class="pin">
       <div class="wrap pin-grid">
         <div class="caps">
@@ -243,7 +313,7 @@ const w = (t: string, fs: number) => Math.round(t.length * fs * 0.56 + 28);
   </section>
 
   <!-- Chapter 3: AI checker -->
-  <section class="scene dark checker" id="ai-checker" data-scene data-steps="6" aria-label="AI factsheet checker">
+  <section class="scene dark checker" id="ai-checker" data-scene data-steps="6" data-ms="3600" aria-label="AI factsheet checker">
     <div class="pin">
       <div class="wrap pin-grid check-layout">
         <div class="caps">
@@ -361,7 +431,7 @@ const w = (t: string, fs: number) => Math.round(t.length * fs * 0.56 + 28);
   </section>
 
   <!-- Chapter 4: the business side -->
-  <section class="scene light biz" data-scene data-steps="2" aria-label="The business side: Bachelor of Commerce">
+  <section class="scene light biz" data-scene data-steps="2" data-ms="4200" aria-label="The business side: Bachelor of Commerce">
     <div class="pin">
       <div class="wrap pin-grid biz-grid">
         <div class="caps">
@@ -439,53 +509,127 @@ const w = (t: string, fs: number) => Math.round(t.length * fs * 0.56 + 28);
 </Base>
 
 <script>
-  // Drives every pinned chapter from the scroll position.
-  // --p is the chapter's progress (0 to 1); --pe is an eased version used for motion.
+  // Each chapter plays its animation automatically while it is on screen.
+  // Nothing is pinned, so visitors can scroll past at any point.
+  // A small control under each multi-step chapter lets people pause or jump to a step.
+  const root = document.documentElement;
+  root.classList.add('js');
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const scenes = Array.from(document.querySelectorAll<HTMLElement>('[data-scene]'));
   const darkZones = Array.from(document.querySelectorAll<HTMLElement>('.scene.dark, .close'));
-  const clamp = (v: number) => Math.min(1, Math.max(0, v));
 
-  function update() {
-    const vh = window.innerHeight;
-    // Darken the menu bar while a black chapter sits underneath it.
-    const navDark = darkZones.some((el) => {
-      const r = el.getBoundingClientRect();
-      return r.top <= 30 && r.bottom > 30;
+  type State = { el: HTMLElement; steps: number; step: number; ms: number; timer?: number; playing: boolean; visible: boolean; intro: boolean; dots: HTMLButtonElement[]; toggle?: HTMLButtonElement };
+
+  function render(st: State) {
+    const { el, step } = st;
+    el.dataset.step = String(step);
+    el.querySelectorAll<HTMLElement>('[data-at]').forEach((n) => n.classList.toggle('on', Number(n.dataset.at) === step));
+    el.querySelectorAll<HTMLElement>('[data-from]').forEach((n) => n.classList.toggle('on', step >= Number(n.dataset.from)));
+    st.dots.forEach((d, i) => {
+      d.classList.toggle('on', i === step);
+      d.setAttribute('aria-current', i === step ? 'step' : 'false');
     });
-    document.documentElement.classList.toggle('nav-dark', navDark);
-
-    for (const scene of scenes) {
-      const rect = scene.getBoundingClientRect();
-      const span = rect.height - vh;
-      const p = span > 0 ? clamp(-rect.top / span) : 1;
-      const pe = clamp((p - 0.08) / 0.62);
-      scene.style.setProperty('--p', p.toFixed(4));
-      scene.style.setProperty('--pe', pe.toFixed(4));
-
-      const steps = Number(scene.dataset.steps || 1);
-      const step = Math.min(steps - 1, Math.floor(p * steps));
-      scene.dataset.step = String(step);
-
-      scene.querySelectorAll<HTMLElement>('[data-at]').forEach((el) =>
-        el.classList.toggle('on', Number(el.dataset.at) === step));
-      scene.querySelectorAll<HTMLElement>('[data-from]').forEach((el) =>
-        el.classList.toggle('on', step >= Number(el.dataset.from)));
-      scene.querySelectorAll<HTMLElement>('[data-count-from]').forEach((el) => {
-        const from = Number(el.dataset.countFrom);
-        const to = Number(el.dataset.countTo);
-        el.textContent = String(Math.round(from + (to - from) * pe));
-      });
-    }
+    // restart the progress fill on the active dot
+    const active = st.dots[step];
+    if (active) { active.classList.remove('run'); void active.offsetWidth; if (st.playing) active.classList.add('run'); }
   }
 
+  function schedule(st: State) {
+    window.clearTimeout(st.timer);
+    if (!st.playing || !st.visible || st.steps < 2) return;
+    const last = st.step === st.steps - 1;
+    st.timer = window.setTimeout(() => {
+      st.step = last ? 0 : st.step + 1;
+      render(st);
+      schedule(st);
+    }, last ? st.ms * 1.8 : st.ms);
+  }
+
+  function setPlaying(st: State, on: boolean) {
+    st.playing = on;
+    st.el.classList.toggle('paused', !on);
+    if (st.toggle) {
+      st.toggle.setAttribute('aria-label', on ? 'Pause animation' : 'Play animation');
+      st.toggle.dataset.state = on ? 'playing' : 'paused';
+    }
+    render(st);
+    schedule(st);
+  }
+
+  // One-off entrance tween for counters, bars and drawn lines (--pe goes 0 to 1).
+  function playIntro(st: State) {
+    if (st.intro) return;
+    st.intro = true;
+    const counters = Array.from(st.el.querySelectorAll<HTMLElement>('[data-count-from]'));
+    const setPe = (pe: number) => {
+      st.el.style.setProperty('--pe', pe.toFixed(4));
+      counters.forEach((c) => {
+        const from = Number(c.dataset.countFrom), to = Number(c.dataset.countTo);
+        c.textContent = String(Math.round(from + (to - from) * pe));
+      });
+    };
+    if (reduce) { setPe(1); return; }
+    const start = performance.now(), dur = 1600;
+    const tick = (t: number) => {
+      const x = Math.min(1, (t - start) / dur);
+      setPe(1 - Math.pow(1 - x, 3));
+      if (x < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }
+
+  const states: State[] = scenes.map((el) => {
+    const steps = Number(el.dataset.steps || 1);
+    const st: State = { el, steps, step: 0, ms: Number(el.dataset.ms || 3000), playing: !reduce, visible: false, intro: false, dots: [] };
+    el.style.setProperty('--pe', reduce ? '1' : '0');
+
+    if (steps > 1) {
+      const bar = document.createElement('div');
+      bar.className = 'stepper';
+      const toggle = document.createElement('button');
+      toggle.type = 'button';
+      toggle.className = 'st-toggle';
+      toggle.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path class="i-pause" d="M8 5v14M16 5v14"/><path class="i-play" d="M8 5l11 7-11 7z"/></svg>';
+      toggle.addEventListener('click', () => setPlaying(st, !st.playing));
+      bar.appendChild(toggle);
+      st.toggle = toggle;
+      for (let i = 0; i < steps; i++) {
+        const label = el.querySelector(`[data-at="${i}"] h2, [data-at="${i}"] h3`)?.textContent?.trim() || `Step ${i + 1}`;
+        const dot = document.createElement('button');
+        dot.type = 'button';
+        dot.className = 'st-dot';
+        dot.setAttribute('aria-label', `Step ${i + 1} of ${steps}: ${label}`);
+        dot.innerHTML = '<span></span>';
+        dot.addEventListener('click', () => { st.step = i; setPlaying(st, false); });
+        bar.appendChild(dot);
+        st.dots.push(dot);
+      }
+      el.style.setProperty('--ms', `${st.ms}ms`);
+      (el.querySelector('.caps') ?? el.querySelector('.pin > .wrap'))?.appendChild(bar);
+    }
+    setPlaying(st, st.playing);
+    return st;
+  });
+
+  const io = new IntersectionObserver((entries) => {
+    for (const e of entries) {
+      const st = states.find((s) => s.el === e.target);
+      if (!st) continue;
+      const nowVisible = e.isIntersecting && e.intersectionRatio >= 0.3;
+      if (nowVisible && !st.visible) playIntro(st);
+      st.visible = nowVisible;
+      schedule(st);
+    }
+  }, { threshold: [0, 0.3, 0.6] });
+  states.forEach((st) => io.observe(st.el));
+
+  // Darken the menu bar while a black section sits underneath it.
   let queued = false;
-  const onScroll = () => {
-    if (queued) return;
-    queued = true;
-    requestAnimationFrame(() => { queued = false; update(); });
+  const navCheck = () => {
+    queued = false;
+    const dark = darkZones.some((el) => { const r = el.getBoundingClientRect(); return r.top <= 30 && r.bottom > 30; });
+    root.classList.toggle('nav-dark', dark);
   };
-  document.documentElement.classList.add('js');
-  window.addEventListener('scroll', onScroll, { passive: true });
-  window.addEventListener('resize', onScroll);
-  update();
+  window.addEventListener('scroll', () => { if (!queued) { queued = true; requestAnimationFrame(navCheck); } }, { passive: true });
+  navCheck();
 </script>

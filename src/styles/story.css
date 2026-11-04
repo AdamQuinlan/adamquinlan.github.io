@@ -36,24 +36,129 @@
   background: linear-gradient(var(--muted), transparent);
 }
 
+.hero-pill {
+  display: inline-block; margin-left: 0.5rem; padding: 0.2rem 0.7rem; border-radius: 999px;
+  background: var(--accent-soft); color: var(--accent); font-size: 0.85rem; font-weight: 600; vertical-align: 0.1em;
+}
+a.scroll-cue { text-decoration: none; }
+
+/* ---------- Overview hub ---------- */
+.hub {
+  padding: clamp(4.5rem, 9vw, 7rem) 0;
+  border-top: 1px solid var(--line);
+  background:
+    radial-gradient(ellipse 80% 60% at 100% 0%, rgba(11, 122, 133, 0.07), transparent 70%),
+    var(--bg);
+}
+.hub .kicker { margin-bottom: 0.5rem; }
+.hub-title { font-size: clamp(2.4rem, 5.5vw, 4.2rem); font-weight: 800; letter-spacing: -0.045em; }
+.hub-grid { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: clamp(2rem, 5vw, 4rem); align-items: start; margin-top: 1.5rem; }
+.hub-lede { font-size: clamp(1.15rem, 1.9vw, 1.4rem); line-height: 1.5; color: var(--ink); }
+.hub-about > p:not(.hub-lede) { color: var(--muted); }
+.hub-h3 { font-size: 1.25rem; margin: 2rem 0 1rem; }
+.good { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem 1.5rem; }
+.good li { border-left: 3px solid var(--accent); padding-left: 0.9rem; }
+.good b { display: block; margin-bottom: 0.2rem; }
+.good span { color: var(--muted); font-size: 0.95rem; }
+.now-card {
+  background: #fff; border-radius: 20px; padding: 1.5rem 1.6rem;
+  box-shadow: 0 24px 60px -30px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(0, 0, 0, 0.06);
+  position: sticky; top: 5rem;
+}
+.now-title { display: flex; align-items: center; gap: 0.55rem; font-weight: 700; font-size: 1.05rem; margin-bottom: 0.75rem; }
+.live { width: 9px; height: 9px; border-radius: 50%; background: #28c840; box-shadow: 0 0 0 4px rgba(40, 200, 64, 0.18); }
+.now-card dl { margin: 0; }
+.now-card dl > div { padding: 0.7rem 0; border-top: 1px solid var(--line); }
+.now-card dt { font-size: 0.8rem; font-weight: 600; color: var(--muted); }
+.now-card dd { margin: 0.1rem 0 0; font-weight: 550; }
+.now-actions { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.1rem; }
+.now-actions .btn { padding: 0.6em 1.1em; font-size: 0.95rem; }
+
+.hub-proof {
+  list-style: none; margin: clamp(2.5rem, 5vw, 3.5rem) 0 0; padding: 1.75rem clamp(1rem, 3vw, 2rem);
+  display: grid; grid-template-columns: minmax(0, 1.35fr) repeat(3, minmax(0, 1fr)); gap: 1.5rem;
+  background: var(--night); color: var(--night-ink); border-radius: 22px; text-align: center;
+}
+.hub-proof b {
+  display: block; font-size: clamp(1.5rem, 2.8vw, 2.3rem); font-weight: 800; letter-spacing: -0.04em; white-space: nowrap;
+  background: linear-gradient(100deg, #5fd0d9 10%, #f5f5f7 85%); -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.hub-proof span { display: block; margin: 0.35rem auto 0; color: var(--night-muted); font-size: 0.85rem; max-width: 22ch; }
+
+.explore-title { margin-top: clamp(2.5rem, 5vw, 3.5rem); }
+.explore { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+.explore a {
+  display: grid; grid-template-columns: auto 1fr; grid-template-rows: auto auto; column-gap: 0.9rem; row-gap: 0.15rem;
+  height: 100%; padding: 1.2rem 1.3rem; border-radius: 18px; text-decoration: none; color: var(--ink);
+  background: #fff; box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.07);
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.explore a:hover { box-shadow: 0 0 0 2px var(--accent), 0 18px 40px -24px rgba(11, 122, 133, 0.5); transform: translateY(-2px); }
+.explore svg {
+  grid-row: 1 / 3; width: 42px; height: 42px; padding: 9px; border-radius: 12px;
+  background: var(--accent-soft); fill: none; stroke: var(--accent); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round;
+}
+.explore b { font-size: 1.08rem; align-self: end; }
+.explore span { color: var(--muted); font-size: 0.92rem; line-height: 1.4; }
+.explore .story-link { background: var(--ink); color: #fff; box-shadow: none; }
+.explore .story-link span { color: #a1a1a6; }
+.explore .story-link svg { background: rgba(255, 255, 255, 0.12); stroke: #fff; }
+
+@media (max-width: 60rem) {
+  .hub-grid { grid-template-columns: 1fr; }
+  .now-card { position: static; }
+  .hub-proof { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .hub-proof li:first-child { grid-column: 1 / -1; }
+  .explore { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 40rem) {
+  .good, .explore { grid-template-columns: 1fr; }
+  .hero-pill { display: table; margin: 0.5rem auto 0; }
+}
+
 /* ---------- Chapter scaffolding ---------- */
 .scene { position: relative; }
 .scene.dark { background: var(--night); color: var(--night-ink); }
 .scene.light + .scene.light { border-top: 1px solid var(--line); }
 
-.pin { padding: 6rem 0; }
-.js .scene[data-steps='1'] { height: 230vh; }
-.js .scene[data-steps='2'] { height: 300vh; }
-.js .scene[data-steps='4'] { height: 440vh; }
-.js .scene[data-steps='6'] { height: 600vh; }
-.js .pin {
-  position: sticky; top: 0;
-  height: 100vh; height: 100svh;
-  padding: 3.5rem 0 1.5rem;
-  display: flex; align-items: center;
-  overflow: hidden;
-}
+.pin { padding: clamp(4.5rem, 9vw, 7rem) 0; overflow: hidden; }
 .pin > .wrap { width: 100%; }
+
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+[id] { scroll-margin-top: 4.5rem; }
+
+/* Step control under each multi-step chapter */
+.stepper {
+  display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+  margin: clamp(1.75rem, 4vw, 2.75rem) auto 0;
+  padding: 0.45rem 0.7rem; width: fit-content;
+  border-radius: 999px; background: rgba(0, 0, 0, 0.05);
+}
+.dark .stepper { background: rgba(255, 255, 255, 0.09); }
+.caps .stepper { margin-left: 0; margin-top: 1.75rem; }
+.biz[data-step='0'] .wnode.soft, .biz[data-step='0'] .edge.soft { opacity: 0.12 !important; }
+.wnode.soft, .edge.soft { transition: opacity 0.6s ease; }
+.st-toggle {
+  width: 30px; height: 30px; border-radius: 50%; border: 0; cursor: pointer;
+  display: grid; place-items: center; background: var(--ink); color: var(--bg); margin-right: 0.25rem;
+}
+.dark .st-toggle { background: var(--night-ink); color: #000; }
+.st-toggle svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+.st-toggle .i-play { fill: currentColor; stroke-width: 1.5; }
+.st-toggle[data-state='playing'] .i-play, .st-toggle[data-state='paused'] .i-pause { display: none; }
+.st-dot {
+  position: relative; width: 9px; height: 9px; padding: 0; border: 0; border-radius: 999px; cursor: pointer;
+  background: rgba(0, 0, 0, 0.22); overflow: hidden; transition: width 0.35s ease, background 0.3s;
+}
+.dark .st-dot { background: rgba(255, 255, 255, 0.3); }
+.st-dot::after { content: ''; position: absolute; inset: -10px -4px; }
+.st-dot.on { width: 34px; }
+.st-dot span { position: absolute; inset: 0; width: 100%; background: var(--accent); border-radius: inherit; transform: scaleX(0); transform-origin: left; }
+.dark .st-dot span { background: var(--night-accent); }
+.st-dot.on span { transform: scaleX(1); }
+.st-dot.on.run span { animation: fill var(--ms, 3000ms) linear forwards; }
+@keyframes fill { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 
 .pin-grid {
   display: grid;
@@ -374,7 +479,7 @@
 /* ---------- Small screens ---------- */
 @media (max-width: 52rem) {
   .pin-grid, .check-layout, .biz-grid { grid-template-columns: 1fr; gap: 1.1rem; }
-  .js .pin { padding-top: 6.25rem; align-items: flex-start; }
+  .pin { padding: 3.75rem 0; }
   .cap h2 { font-size: clamp(1.55rem, 7vw, 2.1rem); margin-bottom: 0.35em; }
   .cap p { font-size: 0.92rem; margin-bottom: 0; }
   .kicker { font-size: 0.9rem; margin-bottom: 0.4rem; }
@@ -385,7 +490,6 @@
   .way-cards { margin-top: 1.5rem; }
   .way-card { padding: 1.1rem 1.2rem; }
   .way-card p { font-size: 0.92rem; }
-  .js .way .pin { align-items: center; }
 
   .sources li { font-size: 0.7rem; }
   .macro { display: none; }
@@ -410,7 +514,6 @@
   .verdict strong { font-size: 0.9rem; margin-bottom: 0.15rem; }
   .verdict li { font-size: 0.72rem; padding: 0.3rem 0; }
 
-  .scene.stat .pin, .scene.scale .pin { align-items: center; }
   .offer-grid { grid-template-columns: 1fr; gap: 0.5rem; margin-top: 1rem; }
   .offer-grid li { padding: 0.7rem 0.9rem; border-radius: 14px; }
   .offer-grid h3 { font-size: 0.95rem; margin-bottom: 0.15rem; }

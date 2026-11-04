@@ -1,7 +1,8 @@
 ---
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
-import { site, experience, education, fill } from '../data/site';
+import NextLinks from '../components/NextLinks.astro';
+import { site, experience, education, fill, hats, studied, proof } from '../data/site';
 
 const sections = [
   { heading: 'Experience', items: experience },
@@ -15,6 +16,13 @@ const sections = [
   </PageHero>
   <section class="section first">
     <div class="wrap">
+      <section class="block">
+        <h2>One internship, four hats</h2>
+        <p class="sub">My title at Lazard was intern. The work spanned four roles.</p>
+        <ul class="hats">
+          {hats.map((h) => <li><b>{h.title}</b><span>{h.body}</span></li>)}
+        </ul>
+      </section>
 
       {sections.map((s) => (
         <section class="block">
@@ -33,8 +41,19 @@ const sections = [
           </ol>
         </section>
       ))}
+
+      <section class="block">
+        <h2>What I studied</h2>
+        <ul class="tags studied">{studied.map((t) => <li>{t}</li>)}</ul>
+      </section>
+
+      <section class="block">
+        <h2>Results so far</h2>
+        <ul class="res">{proof.map((p) => <li><b>{p.value}</b><span>{p.label}</span></li>)}</ul>
+      </section>
     </div>
   </section>
+  <NextLinks current="/resume" />
 </Base>
 
 <style>
@@ -42,6 +61,21 @@ const sections = [
   .first { padding-top: 1rem; }
   .dl { margin-top: 1.5rem; }
   .block { margin-top: 3rem; }
+  .sub { color: var(--muted); }
+  .hats { list-style: none; margin: 1rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; }
+  .hats li { background: #fff; border-radius: 16px; padding: 1.1rem 1.2rem; box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.06); border-top: 4px solid var(--accent); }
+  .hats b { display: block; margin-bottom: 0.3rem; font-size: 1.05rem; }
+  .hats span { color: var(--muted); font-size: 0.93rem; }
+  .studied { margin-top: 1rem; }
+  .res { list-style: none; margin: 1rem 0 0; padding: 1.3rem clamp(1rem, 3vw, 2rem); display: grid; grid-template-columns: minmax(0, 1.35fr) repeat(3, minmax(0, 1fr)); gap: 1.25rem; background: var(--night); border-radius: 20px; }
+  .res b { display: block; font-size: clamp(1.4rem, 2.6vw, 2rem); font-weight: 800; letter-spacing: -0.04em; white-space: nowrap; background: linear-gradient(100deg, #5fd0d9 10%, #f5f5f7 85%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .res span { color: var(--night-muted); font-size: 0.85rem; }
+  @media (max-width: 60rem) {
+    .hats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .res { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .res li:first-child { grid-column: 1 / -1; }
+  }
+  @media (max-width: 36rem) { .hats { grid-template-columns: 1fr; } }
   .block h2 { font-size: var(--step-2); }
   .timeline { list-style: none; padding: 0; margin: 1rem 0 0; }
   .timeline > li {

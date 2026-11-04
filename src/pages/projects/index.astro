@@ -2,6 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import ProjectList from '../../components/ProjectList.astro';
 import PageHero from '../../components/PageHero.astro';
+import NextLinks from '../../components/NextLinks.astro';
 import { projects } from '../../data/site';
 ---
 <Base title="Projects" description="Data engineering, automation and internal app projects.">
@@ -11,6 +12,14 @@ import { projects } from '../../data/site';
   <section class="section">
     <div class="wrap">
       <ProjectList items={projects} />
+      <p class="more">
+        Alongside these, I run the monthly client reports and handle ad hoc data requests for the business.
+      </p>
     </div>
   </section>
+  <NextLinks current="/projects" />
 </Base>
+
+<style>
+  .more { color: var(--muted); margin-top: 2rem; max-width: 60ch; }
+</style>

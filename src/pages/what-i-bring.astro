@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import NextLinks from '../components/NextLinks.astro';
 import { site, proof, offers, startPlan } from '../data/site';
 ---
 <Base title="What I bring" description="What I can do for your team: find where time is lost, automate the repetitive work, and put AI to practical use.">
@@ -65,6 +66,7 @@ import { site, proof, offers, startPlan } from '../data/site';
       </div>
     </div>
   </section>
+  <NextLinks current="/what-i-bring" />
 </Base>
 
 <style>
@@ -111,7 +113,7 @@ import { site, proof, offers, startPlan } from '../data/site';
   .plan h3 { font-size: 1.35rem; margin-bottom: 0.4rem; }
   .plan p { color: var(--muted); margin: 0; }
 
-  .pitch-close { background: var(--night); color: var(--night-ink); text-align: center; padding: clamp(5rem, 12vw, 8rem) 0; margin-bottom: -2rem; }
+  .pitch-close { background: var(--night); color: var(--night-ink); text-align: center; padding: clamp(5rem, 12vw, 8rem) 0; }
   .pitch-close h2 { font-size: clamp(2.2rem, 5.5vw, 4.4rem); font-weight: 800; letter-spacing: -0.045em; max-width: 18ch; margin-left: auto; margin-right: auto; }
   .pitch-close p { color: var(--night-muted); margin: 0 auto; font-size: 1.15rem; }
   .actions { display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; margin-top: 2rem; }

@@ -1,6 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import PageHero from '../../components/PageHero.astro';
+import NextLinks from '../../components/NextLinks.astro';
 import { projects, fill, type Project } from '../../data/site';
 
 export function getStaticPaths() {
@@ -14,6 +15,20 @@ const { project } = Astro.props as { project: Project };
     <p class="lede">{project.summary}</p>
     <ul class="tags">{project.tags.map((t) => <li>{t}</li>)}</ul>
   </PageHero>
+  <section class="glance-sec">
+    <div class="wrap">
+      <ul class="metrics">
+        {project.metrics.map((m) => <li><b>{m.value}</b><span>{m.label}</span></li>)}
+      </ul>
+      <dl class="glance">
+        <div><dt>My role</dt><dd>{project.role}</dd></div>
+        <div><dt>Team</dt><dd>{project.team}</dd></div>
+        <div><dt>When</dt><dd>{project.when}</dd></div>
+        <div><dt>Stack</dt><dd><ul class="tags">{project.stack.map((t) => <li>{t}</li>)}</ul></dd></div>
+      </dl>
+    </div>
+  </section>
+
   <article class="section">
     <div class="wrap">
       <a class="back" href="/projects">All projects</a>
@@ -22,6 +37,12 @@ const { project } = Astro.props as { project: Project };
         <section>
           <h2>The problem</h2>
           <p set:html={fill(project.problem)} />
+        </section>
+        <section>
+          <h2>How it flows</h2>
+          <ol class="flow">
+            {project.flow.map((f, i) => <li><span class="fn">{i + 1}</span>{f}</li>)}
+          </ol>
         </section>
         <section>
           <h2>What I built</h2>
@@ -38,13 +59,41 @@ const { project } = Astro.props as { project: Project };
           </section>
         )}
       </div>
+      <div class="next-proj">
+        {projects.filter((p) => p.slug !== project.slug).map((p) => (
+          <a href={`/projects/${p.slug}`}><span>Next project</span><b>{p.title}</b></a>
+        ))}
+      </div>
     </div>
   </article>
+  <NextLinks current="/projects" />
 </Base>
 
 <style>
   .back { display: inline-block; margin-bottom: 1.5rem; font-weight: 500; }
 :global(.ph) .tags { margin-top: 1.25rem; }
+  .glance-sec { padding: clamp(2rem, 5vw, 3rem) 0 0; }
+  .metrics { list-style: none; margin: 0; padding: 1.4rem clamp(1rem, 3vw, 2rem); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.25rem; background: var(--night); color: var(--night-ink); border-radius: 20px; }
+  .metrics b { display: block; font-size: clamp(1.5rem, 2.8vw, 2.2rem); font-weight: 800; letter-spacing: -0.04em; background: linear-gradient(100deg, #5fd0d9 10%, #f5f5f7 85%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .metrics span { color: var(--night-muted); font-size: 0.88rem; }
+  .glance { margin: 1.25rem 0 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem 1.5rem; }
+  .glance dt { font-size: 0.8rem; font-weight: 600; color: var(--muted); margin-bottom: 0.25rem; }
+  .glance dd { margin: 0; font-size: 0.95rem; }
+  .glance .tags { gap: 0.3rem; }
+  .flow { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.6rem; max-width: 26rem; }
+  .flow li { position: relative; display: flex; align-items: center; gap: 0.6rem; background: #fff; border-radius: 12px; padding: 0.6rem 0.85rem; box-shadow: 0 0 0 1px var(--line); font-weight: 550; font-size: 0.95rem; }
+  .flow li:not(:last-child)::after { content: ''; position: absolute; left: 1.55rem; bottom: -0.62rem; width: 2px; height: 0.62rem; background: var(--accent); }
+  .flow li:last-child { box-shadow: 0 0 0 2px var(--accent); }
+  .fn { display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: var(--accent-soft); color: var(--accent); font-size: 0.75rem; font-weight: 700; }
+  .next-proj { margin-top: 3rem; }
+  .next-proj a { display: inline-flex; flex-direction: column; padding: 1rem 1.3rem; border-radius: 16px; background: #fff; box-shadow: 0 0 0 1px var(--line); text-decoration: none; color: var(--ink); }
+  .next-proj a:hover { box-shadow: 0 0 0 2px var(--accent); }
+  .next-proj span { font-size: 0.8rem; color: var(--muted); font-weight: 600; }
+  .next-proj b { font-size: 1.15rem; }
+  @media (max-width: 52rem) {
+    .metrics { grid-template-columns: 1fr; }
+    .glance { grid-template-columns: 1fr 1fr; }
+  }
   .body { margin-top: 1rem; display: grid; gap: 2.5rem; max-width: 46rem; }
   .body h2 { font-size: var(--step-2); }
   .steps { padding-left: 1.2rem; margin: 0; }

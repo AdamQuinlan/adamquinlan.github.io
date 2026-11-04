@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
+import NextLinks from '../components/NextLinks.astro';
 import { site, fill } from '../data/site';
 
 const channels = [
@@ -29,8 +30,13 @@ const channels = [
           <dd set:html={fill(site.location)} />
         </div>
       </dl>
+      <div class="cta-row">
+        <a class="btn" href={`mailto:${site.email}?subject=Hi%20Adam`}>Email me</a>
+        <a class="btn ghost" href={site.linkedin}>Connect on LinkedIn</a>
+      </div>
     </div>
   </section>
+  <NextLinks current="/contact" />
 </Base>
 
 <style>
@@ -41,5 +47,7 @@ const channels = [
   }
   .channels > div:last-child { border-bottom: 1px solid var(--line); }
   dt { font-weight: 600; }
+  .cta-row { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 2rem; }
+  .note { color: var(--muted); margin-top: 1rem; font-size: 0.95rem; }
   dd { margin: 0; font-size: var(--step-1); overflow-wrap: anywhere; }
 </style>

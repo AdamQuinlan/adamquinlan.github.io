@@ -58,6 +58,12 @@ export type Project = {
   title: string;
   summary: string;
   tags: string[];
+  role: string;
+  team: string;
+  stack: string[];
+  when: string;
+  metrics: { value: string; label: string }[];
+  flow: string[];
   problem: string;
   approach: string[];
   outcome: string;
@@ -70,6 +76,16 @@ export const projects: Project[] = [
     title: 'Monthly factsheet automation',
     summary: 'Around 200 Excel master files that turn raw data into finished client factsheets, cutting monthly reporting from two weeks to six days.',
     tags: ['Excel', 'Macros', 'Automation', 'Team project'],
+    role: 'Built automation into the master files and ran the monthly client reporting.',
+    team: 'My team at Lazard Asset Management',
+    stack: ['Microsoft Excel', 'Formulas', 'VBA macros', 'Dynamic named ranges', 'Microsoft Word'],
+    when: '2026, during my internship',
+    metrics: [
+      { value: '2 wks → 6 days', label: 'to compile the full line of monthly client reports' },
+      { value: '2 → 1', label: 'people needed to run it' },
+      { value: '~200', label: 'master files in the system' },
+    ],
+    flow: ['Excel and Word source files', 'Raw data sheet (Update)', 'Transformation sheet with checks', 'Dynamic named range', 'Output factsheet', 'Save as final'],
     problem:
       'Every month, the full line of client reports had to be compiled from data spread across Excel and Word files. It took about two weeks of full-time work and needed two people.',
     approach: [
@@ -87,6 +103,16 @@ export const projects: Project[] = [
     title: 'AI factsheet checker',
     summary: 'Three AI agents check each factsheet, reconcile their findings, and return one clear outcome.',
     tags: ['Claude Code', 'Claude API', 'AI agents', 'Production'],
+    role: 'Worked out what the teams needed, then designed and built the app and took it into production.',
+    team: 'For the product and sales teams at Lazard Asset Management',
+    stack: ['Claude Code', 'Claude API (Sonnet)', 'Azure', 'Multi-agent workflow', 'Prompt design'],
+    when: '2026, during my internship',
+    metrics: [
+      { value: '60 → 5 min', label: 'to check a factsheet' },
+      { value: '3', label: 'specialist AI agents that cross-check each other' },
+      { value: 'Live', label: 'in production for product and sales' },
+    ],
+    flow: ['Final factsheet', 'Visual agent', 'Period agent', 'Raw data agent', 'Agents reconcile', 'Fine / look at / fix'],
     problem:
       'Before a factsheet reached a client, the product and sales teams checked it by hand. Each check took about an hour.',
     approach: [
@@ -156,3 +182,55 @@ export const startPlan = [
   { when: 'Next', title: 'Deliver a quick win', body: 'Pick one high-value bottleneck and ship a working fix, so the team sees results early.' },
   { when: 'Then', title: 'Scale what works', body: 'Extend it to similar processes, document it, and make sure the team can run it without me.' },
 ];
+
+// ---------- Overview hub and richer page content ----------
+
+export const facts = [
+  { label: 'Based in', value: 'Sydney, Australia' },
+  { label: 'Now', value: 'Intern at Lazard Asset Management, March 2026 – January 2027' },
+  { label: 'Studying', value: 'Bachelor of Commerce (International Business), Macquarie University' },
+  { label: 'Graduating', value: 'November 2026' },
+  { label: 'Learning', value: 'SQL and Python' },
+  { label: 'Looking for', value: 'Graduate data engineering and data analyst roles' },
+];
+
+export const strengths = [
+  { title: 'Automating reporting', body: 'Excel automation, VBA macros and built-in data checks that turn days of manual work into a click.' },
+  { title: 'Practical AI tools', body: 'Multi-agent workflows built with Claude Code, designed around how a team actually works.' },
+  { title: 'Understanding the business', body: 'A commerce degree and day-to-day work with sales and product teams.' },
+  { title: 'Learning fast', body: 'Took an AI app into production during my internship. Building my SQL and Python now.' },
+];
+
+export const hubLinks = [
+  { href: '/about', title: 'About', body: 'My background, how I work, and my toolkit.', icon: 'person' },
+  { href: '/projects', title: 'Projects', body: 'Factsheet automation and the AI factsheet checker, in detail.', icon: 'grid' },
+  { href: '/resume', title: 'Experience', body: 'My internship at Lazard and my degree at Macquarie.', icon: 'path' },
+  { href: '/what-i-bring', title: 'What I bring', body: 'What I can do for your team, with proof.', icon: 'spark' },
+  { href: '/contact', title: 'Contact', body: 'Email, LinkedIn, and where I’m based.', icon: 'mail' },
+];
+
+export const principles = [
+  { title: 'Understand before I build', body: 'I sit with the people doing the work first. The checker started with watching how product and sales checked documents.' },
+  { title: 'Get something real in front of people', body: 'A working prototype beats a slide. With Claude Code I can show a team a first version quickly and shape it with them.' },
+  { title: 'Build the checks in', body: 'Speed only helps if the output is right. My master files check themselves, and the AI agents cross-check each other.' },
+  { title: 'Leave it runnable', body: 'A process should keep working when I’m not in the room. Our reporting now runs with one person and two clicks.' },
+];
+
+export const toolkit = [
+  { tool: 'Microsoft Excel and VBA', use: 'Master files with formulas, macros, dynamic named ranges and built-in checks.' },
+  { tool: 'Claude Code', use: 'Built the AI factsheet checker from prototype to production.' },
+  { tool: 'Claude API (Sonnet) via Azure', use: 'Powers the three checking agents.' },
+  { tool: 'Prompt design', use: 'Wrote and refined each agent’s instructions, using Claude to sharpen them.' },
+  { tool: 'Microsoft Office', use: 'Word and Excel source files, Outlook and day-to-day reporting.' },
+  { tool: 'Coder', use: 'Used to host our team’s websites.' },
+  { tool: 'SQL and Python', use: 'Currently learning, with plenty of hands-on experimenting.' },
+];
+
+export const hats = [
+  { title: 'Business analyst', body: 'Talking to teams about what they need and turning it into something buildable.' },
+  { title: 'Data analyst', body: 'Running the monthly client reports and handling ad hoc requests.' },
+  { title: 'Business systems', body: 'Looking after the master file system and the tools teams rely on.' },
+  { title: 'Data engineer', body: 'Building the automation that moves raw data to a finished, checked output.' },
+];
+
+export const studied = ['Accounting', 'Finance', 'Marketing', 'Economics', 'International business', 'Culture', 'People and team management'];
