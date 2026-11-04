@@ -6,6 +6,15 @@
 :root {
   --bg: #fbfbfd;
   --surface: #ffffff;
+  --bg-rgb: 251, 251, 253;
+  --band: #f3f5f6;
+  --ring: rgba(0, 0, 0, 0.07);
+  --line-soft: rgba(0, 0, 0, 0.08);
+  --on-accent: #ffffff;
+  --node-dark: #1d1d1f;
+  --amber-strong: #c27f00;
+  --amber-ink: #8a5f00;
+  --amber-tag: #f3dfa8;
   --ink: #1d1d1f;
   --muted: #6e6e73;
   --line: #d2d2d7;
@@ -43,6 +52,39 @@
   --wrap: 68rem;
   --gutter: clamp(1rem, 4vw, 2.5rem);
 }
+
+/* Dark theme: same teal, gold, coral and violet, tuned for a dark background */
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --bg: #0b0f12;
+  --bg-rgb: 11, 15, 18;
+  --surface: #141b20;
+  --band: #0f1519;
+  --ink: #e9eef0;
+  --muted: #9aa8ae;
+  --line: #27333a;
+  --line-soft: rgba(255, 255, 255, 0.08);
+  --ring: rgba(255, 255, 255, 0.08);
+  --accent: #3fc3cd;
+  --accent-soft: #0f3338;
+  --on-accent: #04272b;
+  --node-dark: #26343c;
+  --signal: #e3b448;
+  --signal-soft: #3a2f12;
+  --amber-soft: #33290f;
+  --amber-strong: #f0b73c;
+  --amber-ink: #f0c25a;
+  --amber-tag: #4a3a14;
+  --coral: #ff7f69;
+  --coral-soft: #3b1d18;
+  --violet: #9488ff;
+  --violet-soft: #221e46;
+  --night: #121a1f;
+  --night-2: #182228;
+}
+:root[data-theme='dark'] .btn:hover { background: #6fd8df; }
+:root[data-theme='dark'] img { filter: brightness(0.92); }
+body { transition: background-color 0.3s ease, color 0.3s ease; }
 
 *, *::before, *::after { box-sizing: border-box; }
 
@@ -88,7 +130,7 @@ a:hover { text-decoration-thickness: 2px; }
   padding: 0.7em 1.2em;
   border-radius: 999px;
   background: var(--accent);
-  color: #fff;
+  color: var(--on-accent);
   font-weight: 550;
   text-decoration: none;
 }
@@ -119,6 +161,6 @@ a:hover { text-decoration-thickness: 2px; }
 
 /* Colour cycle for repeated cards: teal, amber, coral, violet */
 .cycle > :nth-child(4n + 1) { --c: var(--accent); --cs: var(--accent-soft); }
-.cycle > :nth-child(4n + 2) { --c: #c27f00; --cs: var(--amber-soft); }
+.cycle > :nth-child(4n + 2) { --c: var(--amber-strong); --cs: var(--amber-soft); }
 .cycle > :nth-child(4n + 3) { --c: var(--coral); --cs: var(--coral-soft); }
 .cycle > :nth-child(4n + 4) { --c: var(--violet); --cs: var(--violet-soft); }

@@ -84,7 +84,7 @@ const { project } = Astro.props as { project: Project };
   .glance dd { margin: 0; font-size: 0.95rem; }
   .glance .tags { gap: 0.3rem; }
   .flow { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.6rem; max-width: 26rem; }
-  .flow li { position: relative; display: flex; align-items: center; gap: 0.6rem; background: #fff; border-radius: 12px; padding: 0.6rem 0.85rem; box-shadow: 0 0 0 1px var(--line); font-weight: 550; font-size: 0.95rem; }
+  .flow li { position: relative; display: flex; align-items: center; gap: 0.6rem; background: var(--surface); border-radius: 12px; padding: 0.6rem 0.85rem; box-shadow: 0 0 0 1px var(--line); font-weight: 550; font-size: 0.95rem; }
   .flow > li:not(:last-child)::after { content: ''; position: absolute; left: 1.55rem; bottom: -0.62rem; width: 2px; height: 0.62rem; background: var(--accent); }
   .flow > li:last-child { box-shadow: 0 0 0 2px var(--accent); }
   .flow .has-sub { flex-wrap: wrap; }
@@ -93,7 +93,7 @@ const { project } = Astro.props as { project: Project };
   .flow .sub li::after { display: none; }
   .fn { display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: var(--accent-soft); color: var(--accent); font-size: 0.75rem; font-weight: 700; }
   .next-proj { margin-top: 3rem; }
-  .next-proj a { display: inline-flex; flex-direction: column; padding: 1rem 1.3rem; border-radius: 16px; background: #fff; box-shadow: 0 0 0 1px var(--line); text-decoration: none; color: var(--ink); }
+  .next-proj a { display: inline-flex; flex-direction: column; padding: 1rem 1.3rem; border-radius: 16px; background: var(--surface); box-shadow: 0 0 0 1px var(--line); text-decoration: none; color: var(--ink); }
   .next-proj a:hover { box-shadow: 0 0 0 2px var(--accent); }
   .next-proj span { font-size: 0.8rem; color: var(--muted); font-weight: 600; }
   .next-proj b { font-size: 1.15rem; }

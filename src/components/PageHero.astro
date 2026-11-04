@@ -149,7 +149,7 @@ const { title, kicker, art } = Astro.props;
   }
   .ph::after {
     content: ''; position: absolute; inset: 0; pointer-events: none;
-    background: linear-gradient(90deg, var(--bg) 18%, rgba(251, 251, 253, 0.5) 55%, rgba(251, 251, 253, 0.1));
+    background: linear-gradient(90deg, var(--bg) 18%, rgba(var(--bg-rgb), 0.5) 55%, rgba(var(--bg-rgb), 0.1));
   }
   .ph-grid {
     position: relative; z-index: 1;
@@ -172,7 +172,7 @@ const { title, kicker, art } = Astro.props;
   .nd.biz text { fill: #8a5f00; }
   .nd.dat rect { fill: var(--accent-soft); stroke: var(--accent); }
   .nd.dat text { fill: var(--accent); }
-  .core circle { fill: var(--ink); }
+  .core circle { fill: var(--node-dark); }
   .core text { fill: #fff; font-size: 14px; font-weight: 700; }
 
   .file rect { fill: #fff; stroke-width: 1.5; }
@@ -180,7 +180,7 @@ const { title, kicker, art } = Astro.props;
   .file.xl text { fill: #107c41; }
   .file.wd rect { stroke: #185abd; }
   .file.wd text { fill: #185abd; }
-  .gear circle, .gear rect { fill: var(--ink); }
+  .gear circle, .gear rect { fill: var(--node-dark); }
   .gear .hole { fill: var(--bg); }
   .gear { transform-origin: 182px 130px; animation: spin 14s linear infinite; }
   @keyframes spin { to { transform: rotate(360deg); } }
@@ -219,7 +219,20 @@ const { title, kicker, art } = Astro.props;
 
   @media (max-width: 52rem) {
     .ph-grid { grid-template-columns: 1fr; }
-    .ph::after { background: linear-gradient(180deg, var(--bg) 35%, rgba(251, 251, 253, 0.55)); }
+    .ph::after { background: linear-gradient(180deg, var(--bg) 35%, rgba(var(--bg-rgb), 0.55)); }
     .ph-art svg { max-width: 300px; margin: 0 auto; }
   }
+
+  /* Dark theme: keep illustrations readable */
+  :global(:root[data-theme='dark']) .file rect,
+  :global(:root[data-theme='dark']) .sheet > rect:first-child,
+  :global(:root[data-theme='dark']) .env rect,
+  :global(:root[data-theme='dark']) .ms circle,
+  :global(:root[data-theme='dark']) .lane .flag { fill: var(--surface); }
+  :global(:root[data-theme='dark']) .sheet .row { fill: #2c3a41; }
+  :global(:root[data-theme='dark']) .sheet .hd, :global(:root[data-theme='dark']) .sheet .pie2 { fill: #9fd8dd; }
+  :global(:root[data-theme='dark']) .env rect, :global(:root[data-theme='dark']) .env path { stroke: var(--ink); }
+  :global(:root[data-theme='dark']) .nd.biz rect { fill: var(--amber-soft); }
+  :global(:root[data-theme='dark']) .nd.biz text { fill: var(--amber-ink); }
+  :global(:root[data-theme='dark']) .gear .hole { fill: var(--bg); }
 </style>

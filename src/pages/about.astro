@@ -90,14 +90,14 @@ const icons: Record<string, string> = {
 
 <style>
   .facts-sec { padding-top: clamp(2rem, 5vw, 3rem); padding-bottom: clamp(2rem, 5vw, 3rem); }
-  .facts { margin: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; border-radius: 18px; overflow: hidden; box-shadow: 0 0 0 1px var(--line); background: #fff; }
+  .facts { margin: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; border-radius: 18px; overflow: hidden; box-shadow: 0 0 0 1px var(--line); background: var(--surface); }
   .facts > div { padding: 1rem 1.25rem; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
   .facts > div:nth-child(3n) { border-right: 0; }
   .facts > div:nth-last-child(-n + 3) { border-bottom: 0; }
   .facts dt { font-size: 0.8rem; font-weight: 600; color: var(--muted); }
   .facts dd { margin: 0.15rem 0 0; font-weight: 550; }
   .principles { list-style: none; margin: 1.75rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; }
-  .principles li { background: linear-gradient(180deg, var(--cs) 0, #fff 70%); border-radius: 18px; padding: 1.3rem; box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.06); }
+  .principles li { background: linear-gradient(180deg, var(--cs) 0, var(--surface) 70%); border-radius: 18px; padding: 1.3rem; box-shadow: 0 0 0 1px var(--ring); }
   .principles .n { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: var(--c); color: #fff; font-weight: 700; font-size: 0.9rem; margin-bottom: 0.8rem; }
   .principles h3 { font-size: 1.1rem; margin-bottom: 0.4rem; }
   .principles p { color: var(--muted); font-size: 0.95rem; margin: 0; }
