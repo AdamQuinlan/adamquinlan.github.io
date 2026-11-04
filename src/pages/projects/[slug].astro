@@ -41,7 +41,10 @@ const { project } = Astro.props as { project: Project };
         <section>
           <h2>How it flows</h2>
           <ol class="flow">
-            {project.flow.map((f, i) => <li><span class="fn">{i + 1}</span>{f}</li>)}
+            {project.flow.map((f, i) => typeof f === 'string'
+              ? <li><span class="fn">{i + 1}</span>{f}</li>
+              : <li class="has-sub"><span class="fn">{i + 1}</span>{f.step}<ul class="sub">{f.sub.map((x) => <li>{x}</li>)}</ul></li>
+            )}
           </ol>
         </section>
         <section>
@@ -82,8 +85,12 @@ const { project } = Astro.props as { project: Project };
   .glance .tags { gap: 0.3rem; }
   .flow { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.6rem; max-width: 26rem; }
   .flow li { position: relative; display: flex; align-items: center; gap: 0.6rem; background: #fff; border-radius: 12px; padding: 0.6rem 0.85rem; box-shadow: 0 0 0 1px var(--line); font-weight: 550; font-size: 0.95rem; }
-  .flow li:not(:last-child)::after { content: ''; position: absolute; left: 1.55rem; bottom: -0.62rem; width: 2px; height: 0.62rem; background: var(--accent); }
-  .flow li:last-child { box-shadow: 0 0 0 2px var(--accent); }
+  .flow > li:not(:last-child)::after { content: ''; position: absolute; left: 1.55rem; bottom: -0.62rem; width: 2px; height: 0.62rem; background: var(--accent); }
+  .flow > li:last-child { box-shadow: 0 0 0 2px var(--accent); }
+  .flow .has-sub { flex-wrap: wrap; }
+  .flow .sub { list-style: none; margin: 0.15rem 0 0 1.9rem; padding: 0; display: flex; flex-wrap: wrap; gap: 0.4rem; width: 100%; }
+  .flow .sub li { background: var(--accent-soft); color: var(--accent); border-radius: 999px; padding: 0.2rem 0.65rem; font-size: 0.85rem; font-weight: 600; box-shadow: none; }
+  .flow .sub li::after { display: none; }
   .fn { display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: var(--accent-soft); color: var(--accent); font-size: 0.75rem; font-weight: 700; }
   .next-proj { margin-top: 3rem; }
   .next-proj a { display: inline-flex; flex-direction: column; padding: 1rem 1.3rem; border-radius: 16px; background: #fff; box-shadow: 0 0 0 1px var(--line); text-decoration: none; color: var(--ink); }

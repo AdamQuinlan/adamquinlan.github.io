@@ -3,7 +3,7 @@ import type { Project } from '../data/site';
 interface Props { items: Project[] }
 const { items } = Astro.props;
 ---
-<ol class="projects">
+<ol class="projects cycle">
   {items.map((p, i) => (
     <li>
       <a href={`/projects/${p.slug}`}>
@@ -27,12 +27,12 @@ const { items } = Astro.props;
   .projects { list-style: none; padding: 0; margin: 0; display: grid; gap: 1.25rem; }
   .projects a {
     display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 1.5rem 2.5rem;
-    padding: clamp(1.4rem, 3vw, 2.2rem); border-radius: 22px; background: #fff;
+    padding: clamp(1.4rem, 3vw, 2.2rem); border-radius: 22px; background: linear-gradient(135deg, var(--cs) 0, #fff 45%);
     box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.07); color: inherit; text-decoration: none;
     transition: box-shadow 0.2s, transform 0.2s;
   }
   .projects a:hover { box-shadow: 0 0 0 2px var(--accent), 0 24px 50px -30px rgba(11, 122, 133, 0.5); transform: translateY(-2px); }
-  .pc-over { color: var(--accent); font-weight: 650; font-size: 0.9rem; margin-bottom: 0.35rem; }
+  .pc-over { color: var(--c); font-weight: 650; font-size: 0.9rem; margin-bottom: 0.35rem; }
   h3 { font-size: clamp(1.5rem, 2.6vw, 2rem); margin-bottom: 0.5rem; }
   .pc-sum { color: var(--muted); }
   .pc-role { font-size: 0.95rem; }

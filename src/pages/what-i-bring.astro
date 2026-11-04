@@ -29,7 +29,7 @@ import { site, proof, offers, startPlan } from '../data/site';
   <section class="section">
     <div class="wrap">
       <h2>How I can help</h2>
-      <div class="offers">
+      <div class="offers cycle">
         {offers.map((o) => (
           <article class="offer">
             <h3>{o.title}</h3>
@@ -44,7 +44,7 @@ import { site, proof, offers, startPlan } from '../data/site';
   <section class="section">
     <div class="wrap">
       <h2>How I'd start in your team</h2>
-      <ol class="plan">
+      <ol class="plan cycle">
         {startPlan.map((s) => (
           <li>
             <span class="when">{s.when}</span>
@@ -105,11 +105,12 @@ import { site, proof, offers, startPlan } from '../data/site';
     margin: auto 0 0; padding-top: 0.9rem; border-top: 1px solid var(--line);
     color: var(--ink); font-size: 0.9rem;
   }
-  .offer-proof b { color: var(--accent); }
+  .offer-proof b { color: var(--c); }
+  .offer { border-top: 4px solid var(--c); }
 
   .plan { list-style: none; margin: 2rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.25rem; counter-reset: plan; }
-  .plan li { border-top: 3px solid var(--accent); padding-top: 1rem; }
-  .when { display: block; color: var(--accent); font-weight: 650; margin-bottom: 0.3rem; }
+  .plan li { border-top: 3px solid var(--c); padding-top: 1rem; }
+  .when { display: block; color: var(--c); font-weight: 650; margin-bottom: 0.3rem; }
   .plan h3 { font-size: 1.35rem; margin-bottom: 0.4rem; }
   .plan p { color: var(--muted); margin: 0; }
 

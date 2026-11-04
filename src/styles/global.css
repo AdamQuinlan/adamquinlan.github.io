@@ -12,6 +12,12 @@
   --accent: #0b7a85;
   --accent-soft: #dff1f2;
   --signal: #c98f0c;
+  --amber: #e3a21b;
+  --amber-soft: #fcefcf;
+  --coral: #e8664f;
+  --coral-soft: #fde5df;
+  --violet: #6a5ae0;
+  --violet-soft: #e8e5fc;
   --signal-soft: #fbf0d4;
 
   --night: #000000;
@@ -110,3 +116,9 @@ a:hover { text-decoration-thickness: 2px; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
+
+/* Colour cycle for repeated cards: teal, amber, coral, violet */
+.cycle > :nth-child(4n + 1) { --c: var(--accent); --cs: var(--accent-soft); }
+.cycle > :nth-child(4n + 2) { --c: #c27f00; --cs: var(--amber-soft); }
+.cycle > :nth-child(4n + 3) { --c: var(--coral); --cs: var(--coral-soft); }
+.cycle > :nth-child(4n + 4) { --c: var(--violet); --cs: var(--violet-soft); }

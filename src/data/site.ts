@@ -4,17 +4,17 @@
 
 export const site = {
   name: 'Adam Quinlan',
-  role: 'Data engineer',
+  role: 'Business analyst',
   location: 'Sydney, Australia',
   headline:
     'I learn how a team works, find what slows it down, and quickly build the automations and AI tools that make it faster.',
   intro:
-    "I'm finishing a Bachelor of Commerce in international business at Macquarie University and interning at Lazard Asset Management in Sydney, where I work across business analysis, data and business systems. I helped build around 200 Excel master files that cut monthly client reporting from two weeks to six days, and built an AI checking app, now in production, that cut factsheet checks from about an hour to about five minutes.",
+    "I'm finishing a Bachelor of Commerce in international business at Macquarie University and interning at Lazard Asset Management in Sydney, where I work across business analysis, data analysis and business systems. I helped finish and now build the Excel master files (around 200 of them) that cut monthly client reporting from two weeks to six days, and built an AI checking app, now in production, that cut checks from about an hour to about five minutes.",
   email: 'adamquinlana@gmail.com',
   github: 'https://github.com/AdamQuinlan',
   linkedin: 'https://www.linkedin.com/in/adam-quinlan-89a5012b7/',
   resumePdf: '', // e.g. /resume.pdf once the file is added to the public folder
-  openTo: 'Graduate data engineering and data analyst roles',
+  openTo: 'Graduate business analyst and data analyst roles',
 };
 
 export const skills = {
@@ -31,11 +31,12 @@ export const experience = [
     org: 'Lazard Asset Management',
     period: 'March 2026 – January 2027',
     points: [
-      'A combined business analyst, data analyst, business systems and data engineering role: talking to teams about what they need, building automation, running reports and handling ad hoc work.',
-      'Helped build a system of around 200 Excel master files that cut compiling the full line of monthly client reports from about two weeks to about six days, run by one person instead of two.',
+      'A mix of business analyst, data analyst and business systems work, with some hands-on automation and app building: talking to teams about what they need, running reports and handling ad hoc requests.',
+      'Joined just as the team began moving monthly client reporting from manual to automated, and helped finish the system of around 200 Excel master files. Compiling the full line of reports fell from about two weeks to about six days, run by one person instead of two.',
+      'Since about September 2026 I have built the automation: when a new report is needed, it comes to me to create its master file end to end. The monthly run is handled by a colleague.',
       'Built checks into each master file’s transformation, such as flagging unassigned securities and confirming weights total 100%.',
-      'Worked with the product and sales teams to understand their manual checking, then designed and built an AI checking app with Claude Code that went from prototype into production.',
-      'The app runs three Claude Sonnet agents (visual, period-on-period and raw data) that check independently, then reconcile before giving one outcome. Checking time fell from about an hour to about five minutes per factsheet.',
+      'Worked with the product and sales teams to understand their manual checking, then built an AI checking app with Claude Code, in Python, that went from prototype into production. Checking time fell from about an hour to about five minutes.',
+      'Helped wireframe ideas that the rest of my team then built. For example, a tool to replace most of our Salesforce work, leaving Salesforce as a contact list while the app creates campaigns and handles the rest. I worked through it with the sales team and wireframed it.',
     ],
   },
 ];
@@ -46,8 +47,8 @@ export const education = [
     org: 'Macquarie University',
     period: 'Graduating November 2026',
     points: [
-      'Foundations across accounting, finance, marketing and economics.',
-      'Culture and international business: how organisations operate across markets.',
+      'Major in international business: culture, and how organisations operate across markets.',
+      'A foundation-level understanding of accounting, finance, marketing and economics.',
       'People and team management, and extensive team-based project work.',
     ],
   },
@@ -63,7 +64,7 @@ export type Project = {
   stack: string[];
   when: string;
   metrics: { value: string; label: string }[];
-  flow: string[];
+  flow: (string | { step: string; sub: string[] })[];
   problem: string;
   approach: string[];
   outcome: string;
@@ -73,59 +74,63 @@ export type Project = {
 export const projects: Project[] = [
   {
     slug: 'client-report-automation',
-    title: 'Monthly factsheet automation',
-    summary: 'Around 200 Excel master files that turn raw data into finished client factsheets, cutting monthly reporting from two weeks to six days.',
+    title: 'Monthly client report automation',
+    summary: 'Around 200 Excel master files that turn raw data into client reports, from factsheets to decks, cutting monthly reporting from two weeks to six days.',
     tags: ['Excel', 'Macros', 'Automation', 'Team project'],
-    role: 'Built automation into the master files and ran the monthly client reporting.',
+    role: 'Helped finish the move to automation, then took over building new master files from about September 2026.',
     team: 'My team at Lazard Asset Management',
-    stack: ['Microsoft Excel', 'Formulas', 'VBA macros', 'Dynamic named ranges', 'Microsoft Word'],
-    when: '2026, during my internship',
+    stack: ['Microsoft Excel', 'Formulas', 'VBA macros', 'Dynamic named ranges'],
+    when: 'March 2026 onwards',
     metrics: [
       { value: '2 wks → 6 days', label: 'to compile the full line of monthly client reports' },
       { value: '2 → 1', label: 'people needed to run it' },
       { value: '~200', label: 'master files in the system' },
     ],
-    flow: ['Excel and Word source files', 'Raw data sheet (Update)', 'Transformation sheet with checks', 'Dynamic named range', 'Output factsheet', 'Save as final'],
+    flow: ['Source data files', 'Raw data sheet (click Update)', 'Transformation sheet, with checks', 'Dynamic named range', 'Output reports', 'Saved as drafts', 'Product or sales team finalises'],
     problem:
-      'Every month, the full line of client reports had to be compiled from data spread across Excel and Word files. It took about two weeks of full-time work and needed two people.',
+      'Every month, the full line of client reports had to be compiled by hand: factsheets, presentation decks, holdings documents, performance and attribution reports. It took about two weeks of full-time work and needed two people. Because every report was put together a little differently each time, errors were common, and reports were often sent back to our team to be produced again.',
     approach: [
-      'A master file with a Raw data sheet: clicking Update pulls in all of the source data from the Excel and Word files.',
-      'A Transformation sheet of formulas and macros calculates everything the factsheet needs.',
+      'When I joined in March 2026, the move from manual to automated reporting had just started. I helped finish it over the following months, and by about September I was building the automation myself.',
+      'Each report has a master file with a Raw data sheet: clicking Update pulls in all of the source data.',
+      'A Transformation sheet of formulas and VBA macros calculates everything the report needs.',
       'Checks are built into the transformation, such as flagging any unassigned securities and confirming weights total 100%.',
-      'A dynamic named range feeds the results into the Output sheet, which builds the charts, tables, key figures and commentary.',
-      'The output is saved as the final factsheet, then passed on for checking.',
+      'A dynamic named range feeds the results into the Output sheet. When data is added or removed, the output still captures all of it, so nothing is missed.',
+      'The outputs are saved as draft documents and handed to the product or sales team to finalise, now using the AI checking app.',
+      'I handed the monthly run to a colleague. When a new report is needed, it comes to me and I build its master file end to end.',
     ],
     outcome:
-      'Our team built around 200 master files. Compiling the full line of reports now takes about six days (four full days and two part days waiting on data) instead of two weeks, it is run by one person instead of two, and it is far more reliable.',
+      'Our team built around 200 master files. Compiling the full line of reports now takes about six days (four full days and two part days waiting on data) instead of two weeks, it is run by one person instead of two, and far fewer reports come back with errors.',
   },
   {
     slug: 'ai-report-checker',
     title: 'AI factsheet checker',
     summary: 'Three AI agents check each factsheet, reconcile their findings, and return one clear outcome.',
-    tags: ['Claude Code', 'Claude API', 'AI agents', 'Production'],
-    role: 'Worked out what the teams needed, then designed and built the app and took it into production.',
-    team: 'For the product and sales teams at Lazard Asset Management',
-    stack: ['Claude Code', 'Claude API (Sonnet)', 'Azure', 'Multi-agent workflow', 'Prompt design'],
+    tags: ['Claude Code', 'AI agents', 'Python', 'VS Code'],
+    role: 'Worked out what the teams needed, built the app with the product team’s input, and took it into production.',
+    team: 'Built with and for the product and sales teams at Lazard Asset Management',
+    stack: ['Claude Code', 'Python', 'VS Code', 'Multi-agent workflow', 'Prompt design'],
     when: '2026, during my internship',
     metrics: [
       { value: '60 → 5 min', label: 'to check a factsheet' },
       { value: '3', label: 'specialist AI agents that cross-check each other' },
       { value: 'Live', label: 'in production for product and sales' },
     ],
-    flow: ['Final factsheet', 'Visual agent', 'Period agent', 'Raw data agent', 'Agents reconcile', 'Fine / look at / fix'],
+    flow: ['Draft factsheet', { step: 'Agents run', sub: ['Visual agent', 'Period agent', 'Raw data agent'] }, 'Agents reconcile', 'Fine / look at / fix'],
     problem:
-      'Before a factsheet reached a client, the product and sales teams checked it by hand. Each check took about an hour.',
+      'Before a report reached a client, the product and sales teams checked it by hand, and each check took about an hour. To compare the output against the raw data, they had to pull up five or six sources saved in different folders, specific to each task and spread across systems such as Argos and FactSet. The raw data also changed as last month’s month-end was finalised, so the same source could show different numbers depending on the day. People sometimes compared against the wrong version, which caused errors and confusion.',
     approach: [
       'Spent time with the product and sales teams to understand how they checked documents and where the time went.',
       'Visual agent: checks spelling, formatting and layout, such as whether tables and charts are the right size.',
       'Period agent: compares this period’s output with the previous period’s and judges whether each change is expected.',
       'Raw data agent: checks the output against the raw data, so the transformation is correct and nothing is misstated.',
       'The agents then question each other before reporting, which filters out false alarms. The app returns one list: fine, look at, fix.',
-      'Built with Claude Code. The agents run on Claude Sonnet through the Claude API, connected via Azure, and I used Claude to sharpen each agent’s prompts.',
+      'The app does the comparison for the team, so nobody has to dig through five or six raw data sources by hand.',
+      'Built in Python in VS Code with Claude Code, and I used Claude to sharpen each agent’s prompts.',
+      'Built in collaboration with the product team: I took each version to them, gathered their input, and implemented it.',
       'Prototyped quickly, refined it with the teams, and took it through development into production.',
     ],
     outcome:
-      'Checking time dropped from about an hour to about five minutes per factsheet.',
+      'Checking time dropped from about an hour to about five minutes per report, and people no longer need to track down which version of the raw data is current.',
   },
 ];
 
@@ -158,7 +163,7 @@ export const offers = [
   {
     title: 'Put AI to practical use',
     body: 'Not AI for its own sake. I find the tasks where it genuinely saves time and build tools people trust and use every day.',
-    proof: 'A three-agent Claude checker, now in production, cut checks from an hour to five minutes.',
+    proof: 'A three-agent checker built with Claude Code, now in production, cut checks from an hour to five minutes.',
   },
   {
     title: 'Build reliability in',
@@ -191,7 +196,7 @@ export const facts = [
   { label: 'Studying', value: 'Bachelor of Commerce (International Business), Macquarie University' },
   { label: 'Graduating', value: 'November 2026' },
   { label: 'Learning', value: 'SQL and Python' },
-  { label: 'Looking for', value: 'Graduate data engineering and data analyst roles' },
+  { label: 'Looking for', value: 'Graduate business analyst and data analyst roles' },
 ];
 
 export const strengths = [
@@ -203,7 +208,7 @@ export const strengths = [
 
 export const hubLinks = [
   { href: '/about', title: 'About', body: 'My background, how I work, and my toolkit.', icon: 'person' },
-  { href: '/projects', title: 'Projects', body: 'Factsheet automation and the AI factsheet checker, in detail.', icon: 'grid' },
+  { href: '/projects', title: 'Projects', body: 'Client report automation and the AI factsheet checker, in detail.', icon: 'grid' },
   { href: '/resume', title: 'Experience', body: 'My internship at Lazard and my degree at Macquarie.', icon: 'path' },
   { href: '/what-i-bring', title: 'What I bring', body: 'What I can do for your team, with proof.', icon: 'spark' },
   { href: '/contact', title: 'Contact', body: 'Email, LinkedIn, and where I’m based.', icon: 'mail' },
@@ -218,19 +223,20 @@ export const principles = [
 
 export const toolkit = [
   { tool: 'Microsoft Excel and VBA', use: 'Master files with formulas, macros, dynamic named ranges and built-in checks.' },
-  { tool: 'Claude Code', use: 'Built the AI factsheet checker from prototype to production.' },
-  { tool: 'Claude API (Sonnet) via Azure', use: 'Powers the three checking agents.' },
+  { tool: 'Claude Code', use: 'Built the AI factsheet checker, in Python and VS Code, from prototype to production.' },
   { tool: 'Prompt design', use: 'Wrote and refined each agent’s instructions, using Claude to sharpen them.' },
-  { tool: 'Microsoft Office', use: 'Word and Excel source files, Outlook and day-to-day reporting.' },
+  { tool: 'Microsoft Office', use: 'Excel master files that produce Office outputs, Outlook and day-to-day reporting.' },
   { tool: 'Coder', use: 'Used to host our team’s websites.' },
-  { tool: 'SQL and Python', use: 'Currently learning, with plenty of hands-on experimenting.' },
+  { tool: 'SQL and Python', use: 'I have used both to build things, including the checker in Python, but I don’t have an in-depth understanding of either yet. That is what I am working on now.' },
 ];
 
 export const hats = [
-  { title: 'Business analyst', body: 'Talking to teams about what they need and turning it into something buildable.' },
+  { title: 'Business analyst', body: 'Talking to teams about what they need, wireframing ideas, and turning them into something buildable.' },
   { title: 'Data analyst', body: 'Running the monthly client reports and handling ad hoc requests.' },
-  { title: 'Business systems', body: 'Looking after the master file system and the tools teams rely on.' },
-  { title: 'Data engineer', body: 'Building the automation that moves raw data to a finished, checked output.' },
+  { title: 'Business systems', body: 'Building and looking after the master file system and the tools teams rely on, including the AI checker.' },
 ];
 
-export const studied = ['Accounting', 'Finance', 'Marketing', 'Economics', 'International business', 'Culture', 'People and team management'];
+export const studied = {
+  major: ['International business', 'Culture', 'People and team management'],
+  foundations: ['Accounting', 'Finance', 'Marketing', 'Economics'],
+};

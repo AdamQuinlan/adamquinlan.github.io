@@ -32,12 +32,13 @@ const icons: Record<string, string> = {
         <h2>Two sides, one job</h2>
       </div>
       <div class="story">
-        <h3>The engineering side</h3>
+        <h3>The data and systems side</h3>
         <p>
-          At Lazard Asset Management I work across business analysis, data analysis, business systems and
-          data engineering. Day to day that means running the monthly client reports, handling ad hoc
-          requests, and building the automation that takes raw data to a finished, checked factsheet.
-          This year that included an AI checking app built with Claude Code, now used by the product and sales teams.
+          At Lazard Asset Management I work across business analysis, data analysis and business systems.
+          Day to day that means talking to teams about what they need, handling ad hoc requests, and
+          building the Excel master files that turn raw data into client reports. This year it also
+          included an AI checking app built with Claude Code, now used by the product and sales teams,
+          and wireframing ideas that the rest of my team went on to build.
         </p>
         <h3>The business side</h3>
         <p>
@@ -52,7 +53,7 @@ const icons: Record<string, string> = {
   <section class="section">
     <div class="wrap">
       <h2>How I work</h2>
-      <ol class="principles">
+      <ol class="principles cycle">
         {principles.map((p, i) => (
           <li><span class="n">{i + 1}</span><h3>{p.title}</h3><p>{p.body}</p></li>
         ))}
@@ -73,7 +74,7 @@ const icons: Record<string, string> = {
   <section class="section">
     <div class="wrap">
       <h2>Skills</h2>
-      <dl class="skills">
+      <dl class="skills cycle">
         {Object.entries(skills).map(([group, list]) => (
           <div>
             <dt><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" set:html={icons[group] ?? ''} />{group}</dt>
@@ -96,8 +97,8 @@ const icons: Record<string, string> = {
   .facts dt { font-size: 0.8rem; font-weight: 600; color: var(--muted); }
   .facts dd { margin: 0.15rem 0 0; font-weight: 550; }
   .principles { list-style: none; margin: 1.75rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; }
-  .principles li { background: #fff; border-radius: 18px; padding: 1.3rem; box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.06); }
-  .principles .n { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: var(--accent); color: #fff; font-weight: 700; font-size: 0.9rem; margin-bottom: 0.8rem; }
+  .principles li { background: linear-gradient(180deg, var(--cs) 0, #fff 70%); border-radius: 18px; padding: 1.3rem; box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.06); }
+  .principles .n { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: var(--c); color: #fff; font-weight: 700; font-size: 0.9rem; margin-bottom: 0.8rem; }
   .principles h3 { font-size: 1.1rem; margin-bottom: 0.4rem; }
   .principles p { color: var(--muted); font-size: 0.95rem; margin: 0; }
   .toolkit { width: 100%; border-collapse: collapse; margin-top: 1.5rem; }
@@ -111,7 +112,7 @@ const icons: Record<string, string> = {
   .skills { display: grid; gap: 1.25rem; margin: 2rem 0 0; }
   .skills > div { display: grid; grid-template-columns: 13rem 1fr; gap: 1rem; align-items: baseline; border-top: 1px solid var(--line); padding-top: 1.25rem; }
   .skills dt { font-weight: 600; display: flex; align-items: center; gap: 0.55rem; }
-  .ic { width: 22px; height: 22px; flex: none; fill: none; stroke: var(--accent); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .ic { width: 22px; height: 22px; flex: none; fill: none; stroke: var(--c, var(--accent)); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
   .skills dd { margin: 0; }
   @media (max-width: 60rem) {
     .principles { grid-template-columns: repeat(2, minmax(0, 1fr)); }

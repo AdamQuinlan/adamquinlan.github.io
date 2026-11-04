@@ -19,7 +19,16 @@
   line-height: 1;
   margin-bottom: 1.5rem;
 }
-.hero-title .dim { color: #86868b; }
+.hero-title .dim {
+  background: linear-gradient(95deg, var(--accent) 0%, #48b8c2 45%, #e3a21b 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.hero {
+  background:
+    radial-gradient(circle at 18% 22%, rgba(95, 208, 217, 0.22), transparent 30%),
+    radial-gradient(circle at 85% 70%, rgba(240, 180, 60, 0.18), transparent 32%),
+    radial-gradient(circle at 60% 10%, rgba(106, 90, 224, 0.10), transparent 28%);
+}
 .hero-sub {
   font-size: clamp(1.1rem, 2vw, 1.4rem);
   color: var(--muted);
@@ -57,7 +66,7 @@ a.scroll-cue { text-decoration: none; }
 .hub-about > p:not(.hub-lede) { color: var(--muted); }
 .hub-h3 { font-size: 1.25rem; margin: 2rem 0 1rem; }
 .good { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem 1.5rem; }
-.good li { border-left: 3px solid var(--accent); padding-left: 0.9rem; }
+.good li { border-left: 3px solid var(--c, var(--accent)); padding-left: 0.9rem; }
 .good b { display: block; margin-bottom: 0.2rem; }
 .good span { color: var(--muted); font-size: 0.95rem; }
 .now-card {
@@ -96,7 +105,7 @@ a.scroll-cue { text-decoration: none; }
 .explore a:hover { box-shadow: 0 0 0 2px var(--accent), 0 18px 40px -24px rgba(11, 122, 133, 0.5); transform: translateY(-2px); }
 .explore svg {
   grid-row: 1 / 3; width: 42px; height: 42px; padding: 9px; border-radius: 12px;
-  background: var(--accent-soft); fill: none; stroke: var(--accent); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round;
+  background: var(--cs, var(--accent-soft)); fill: none; stroke: var(--c, var(--accent)); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round;
 }
 .explore b { font-size: 1.08rem; align-self: end; }
 .explore span { color: var(--muted); font-size: 0.92rem; line-height: 1.4; }

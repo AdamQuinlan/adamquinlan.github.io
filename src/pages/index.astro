@@ -36,7 +36,7 @@ const way = [
     short: 'Prototype',
     title: 'Build a prototype fast',
     body: 'With Claude Code, I get a working version in front of the team quickly, so they react to something real instead of a slide.',
-    eg: 'A first checker built with Claude Code, running Claude Sonnet agents on real factsheets.',
+    eg: 'A first checker built with Claude Code, tested on real factsheets.',
   },
   {
     short: 'Refine',
@@ -96,7 +96,7 @@ const w = (t: string, fs: number) => Math.round(t.length * fs * 0.56 + 28);
   <section class="hero">
     <div class="wrap">
       <p class="hero-hi">{site.name} <span class="hero-pill">Sydney · Graduating November 2026</span></p>
-      <h1 class="hero-title">Data engineer.<br /><span class="dim">Business thinker.</span></h1>
+      <h1 class="hero-title">Business analyst.<br /><span class="dim">Fluent in data.</span></h1>
       <p class="hero-sub">{site.headline}</p>
       <div class="hero-actions">
         <a class="btn" href="#overview">Get the overview</a>
@@ -115,8 +115,8 @@ const w = (t: string, fs: number) => Math.round(t.length * fs * 0.56 + 28);
         <div class="hub-about">
           <p class="hub-lede">
             I'm a final-year Bachelor of Commerce student at Macquarie University and an intern at
-            Lazard Asset Management in Sydney. My role mixes business analysis, data analysis,
-            business systems and data engineering.
+            Lazard Asset Management in Sydney. My role mixes business analysis, data analysis and
+            business systems, with hands-on automation and app building.
           </p>
           <p>
             In practice that means I talk to teams about what slows them down, then build the
@@ -125,7 +125,7 @@ const w = (t: string, fs: number) => Math.round(t.length * fs * 0.56 + 28);
             that checks each factsheet in five minutes instead of an hour.
           </p>
           <h3 class="hub-h3">What I'm good at</h3>
-          <ul class="good">
+          <ul class="good cycle">
             {strengths.map((g) => <li><b>{g.title}</b><span>{g.body}</span></li>)}
           </ul>
         </div>
@@ -146,7 +146,7 @@ const w = (t: string, fs: number) => Math.round(t.length * fs * 0.56 + 28);
       </ul>
 
       <h3 class="hub-h3 explore-title">Explore</h3>
-      <ul class="explore">
+      <ul class="explore cycle">
         {hubLinks.map((l) => (
           <li>
             <a href={l.href}>
@@ -202,19 +202,19 @@ const w = (t: string, fs: number) => Math.round(t.length * fs * 0.56 + 28);
           <div class="cap-stack">
             <div class="cap" data-at="0">
               <h2>One click pulls in the raw data.</h2>
-              <p>The source data lives in Excel and Word files. In the master file, a single click on Update pulls all of it into the Raw data sheet.</p>
+              <p>Each client report has its own master file. A single click on Update pulls all of its source data into the Raw data sheet.</p>
             </div>
             <div class="cap" data-at="1">
               <h2>Formulas and macros do the work.</h2>
               <p>The Transformation sheet calculates everything the report needs and checks itself: nothing left unassigned, weights adding to 100%. A dynamic named range passes the results to the output.</p>
             </div>
             <div class="cap" data-at="2">
-              <h2>The factsheet builds itself.</h2>
-              <p>The Output sheet becomes a finished client factsheet: charts, tables, key figures and commentary, all generated from the data.</p>
+              <h2>The report builds itself.</h2>
+              <p>The Output sheet becomes a finished client report, like this factsheet. The same approach produces presentation decks, holdings documents, and performance and attribution reports.</p>
             </div>
             <div class="cap" data-at="3">
-              <h2>Save as final. That's it.</h2>
-              <p>Each month a person clicks Update, then saves the output as the final document. Everything in between is automatic. Then it goes for checking.</p>
+              <h2>Save the drafts. That's it.</h2>
+              <p>Each month someone clicks Update and saves the outputs as drafts. Everything in between is automatic. The drafts then go to the product or sales team to check and finalise.</p>
             </div>
           </div>
         </div>
@@ -233,7 +233,7 @@ const w = (t: string, fs: number) => Math.round(t.length * fs * 0.56 + 28);
             </div>
             <div class="xl-ribbon">
               <span class="xl-btn update">Update</span>
-              <span class="xl-btn save">Save as final</span>
+              <span class="xl-btn save">Save as draft</span>
             </div>
             <div class="xl-formula">
               <span class="fx">fx</span>
@@ -241,7 +241,7 @@ const w = (t: string, fs: number) => Math.round(t.length * fs * 0.56 + 28);
                 <code data-at="0">Pulled 3 source files into Raw data</code>
                 <code data-at="1">=SUMIFS(Raw!$D:$D, Raw!$C:$C, $A2)</code>
                 <code data-at="2">Output ← Output_Sectors (dynamic named range)</code>
-                <code data-at="3">Saved as Factsheet_March_2026.pdf</code>
+                <code data-at="3">Saved as Factsheet_March_2026_DRAFT.pdf</code>
               </span>
             </div>
 
@@ -280,8 +280,8 @@ const w = (t: string, fs: number) => Math.round(t.length * fs * 0.56 + 28);
               <div class="saved" data-from="3">
                 <span class="pdf">PDF</span>
                 <div>
-                  <b>Factsheet_March_2026.pdf</b>
-                  <span>Saved as final. Sent for checking.</span>
+                  <b>Factsheet_March_2026_DRAFT.pdf</b>
+                  <span>Saved as draft. Sent to product for checking.</span>
                 </div>
               </div>
             </div>
