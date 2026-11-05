@@ -533,6 +533,39 @@ html { scroll-behavior: smooth; }
   .sl { margin-top: 0.4rem; font-size: 0.92rem; }
 }
 
+
+/* ---------- Chapter: leading at university ---------- */
+.lead-grid { grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr); }
+.lead-link { margin: 1rem 0 0; font-weight: 600; }
+.team { width: 100%; height: auto; display: block; overflow: visible; }
+.team text { font-family: var(--body); text-anchor: middle; font-weight: 650; }
+.m-body { fill: var(--ms); stroke: var(--mc); stroke-width: 2; transition: transform 0.5s, opacity 0.5s; }
+.m-ico { fill: none; stroke: var(--mc); stroke-width: 2.5; stroke-linecap: round; }
+.mate { transition: opacity 0.5s; }
+.lead[data-step='0'] .mate { opacity: 0.55; }
+.skill rect { fill: var(--surface); stroke: var(--mc); stroke-width: 1.5; }
+.skill text { fill: var(--mc); font-size: 14px; }
+.skill, .prog, .tie, .partner, .sched { transition: opacity 0.5s ease, transform 0.5s ease; }
+.js .lead .skill:not(.on) { opacity: 0; transform: translateY(6px); }
+.js .lead .prog:not(.on), .js .lead .sched:not(.on), .js .lead .partner:not(.on) { opacity: 0; }
+.tie { stroke: var(--mc); stroke-width: 2; stroke-dasharray: 5 7; animation: dash 1.4s linear infinite; }
+.js .lead .tie:not(.on) { opacity: 0; }
+.p-bg { fill: var(--line); }
+.p-fill { fill: var(--mc); transform-box: fill-box; transform-origin: left; transform: scaleX(0.15); transition: transform 1.6s ease var(--d); }
+.lead .prog.on .p-fill { transform: scaleX(0.85); }
+.me circle { fill: var(--node-dark); }
+.me text { fill: #fff; font-size: 17px; }
+.partner circle { fill: var(--amber-soft); stroke: var(--amber-strong); stroke-width: 2; }
+.partner .p-t { fill: var(--amber-ink); font-size: 14px; }
+.p-line { stroke: var(--amber-strong); stroke-width: 2; stroke-dasharray: 3 6; animation: dash 1.8s linear infinite; }
+.bubble2 rect { fill: var(--surface); stroke: var(--line); }
+.bubble2 text { fill: var(--ink); font-size: 13px; font-weight: 600; }
+.s-lbl { text-anchor: start !important; fill: var(--muted); font-size: 13px; }
+.s-seg { fill: var(--line); transition: fill 0.4s var(--d); }
+.lead .sched.on .s-seg { fill: var(--accent); }
+.lead[data-step='2'] .s-seg:nth-of-type(n + 4) { fill: var(--line); }
+@media (max-width: 52rem) { .lead-grid { grid-template-columns: 1fr; } }
+
 /* ---------- Dark theme touches ---------- */
 :root[data-theme='dark'] .scene.dark,
 :root[data-theme='dark'] .close { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }

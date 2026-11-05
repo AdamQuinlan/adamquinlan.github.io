@@ -173,7 +173,7 @@ export const offers = [
   {
     title: 'Bridge business and tech',
     body: 'With a commerce background, I can talk to sales, product and finance in their language and turn what they need into something buildable.',
-    proof: 'Worked directly with product and sales teams to design the checker around their workflow.',
+    proof: 'Designed the checker around how product and sales work, and kept an industry partner on side through regular check-ins in my PACE project.',
   },
   {
     title: 'Learn fast and deliver',
@@ -209,7 +209,7 @@ export const strengths = [
 export const hubLinks = [
   { href: '/about', title: 'About', body: 'My background, how I work, and my toolkit.', icon: 'person' },
   { href: '/projects', title: 'Projects', body: 'Client report automation and the AI factsheet checker, in detail.', icon: 'grid' },
-  { href: '/resume', title: 'Experience', body: 'My internship at Lazard and my degree at Macquarie.', icon: 'path' },
+  { href: '/resume', title: 'Experience', body: 'My internship at Lazard, university projects, and my degree.', icon: 'path' },
   { href: '/what-i-bring', title: 'What I bring', body: 'What I can do for your team, with proof.', icon: 'spark' },
   { href: '/contact', title: 'Contact', body: 'Email, LinkedIn, and where I’m based.', icon: 'mail' },
 ];
@@ -241,3 +241,40 @@ export const studied = {
   major: ['International business', 'Culture', 'People and team management'],
   foundations: ['Accounting', 'Finance', 'Marketing', 'Economics'],
 };
+
+// ---------- University projects ----------
+
+export const uniProjects = [
+  {
+    slug: 'capstone',
+    title: 'Capstone: business review for The King’s Foundation',
+    kind: 'Final-year capstone, Macquarie Business School',
+    partner: 'The King’s Foundation (charity)',
+    summary:
+      'The capstone brings the whole degree together. Students from different business majors are grouped into teams to review a real organisation. Our team reviewed The King’s Foundation and built a business plan and implementation process that worked within a budget and returned a profit.',
+    did: [
+      'Reviewed the charity’s current position and where it could grow.',
+      'Built a business plan and a step-by-step implementation process.',
+      'Kept the plan within a set budget while showing a return.',
+    ],
+    lead:
+      'My teammates came from different majors and found planning and deadlines harder, so taking the lead came naturally. I worked out what each person was best at, gave them work that suited them, and kept the plan moving to schedule.',
+    learned: ['Leading a team', 'Delegating to strengths', 'Time management', 'Business planning'],
+  },
+  {
+    slug: 'pace',
+    title: 'PACE: international growth for a hiring start-up',
+    kind: 'PACE industry project, Macquarie University',
+    partner: 'A hiring company using an AI hiring and tutoring agent',
+    summary:
+      'Through Macquarie’s PACE program, our team was paired with an industry partner: a hiring company that wanted to grow internationally. Its business was built around an AI hiring and tutoring agent and was still at an early stage, without an established customer base.',
+    did: [
+      'Assessed how and where the business could expand internationally.',
+      'Met the partner regularly to explain what we were doing and why.',
+      'Looked hard for realistic opportunities in a tough position.',
+    ],
+    lead:
+      'I learned why people drift from an agreed schedule and how to bring them back, again by matching work to strengths. I also managed the relationship with our partner: keeping her informed, making sure she was comfortable with our direction, and being honest about what we found.',
+    learned: ['Managing a stakeholder', 'Keeping a team on schedule', 'Honest analysis', 'International business'],
+  },
+];

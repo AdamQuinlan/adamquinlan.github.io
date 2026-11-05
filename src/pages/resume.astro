@@ -2,33 +2,39 @@
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import NextLinks from '../components/NextLinks.astro';
-import { site, experience, education, fill, hats, studied } from '../data/site';
+import { site, experience, education, fill, hats, studied, uniProjects } from '../data/site';
 
-const sections = [
-  { heading: 'Experience', items: experience },
-  { heading: 'Education', items: education },
+const tabs = [
+  { id: 'lazard', label: 'Lazard internship' },
+  { id: 'uni', label: 'University projects' },
+  { id: 'education', label: 'Education' },
 ];
 ---
 <Base title="Experience" description="Work experience and education.">
   <PageHero title="Experience" kicker="Where I've been, where I'm heading" art="experience">
-    <p class="lede">An internship at Lazard Asset Management alongside a Bachelor of Commerce at Macquarie University.</p>
+    <p class="lede">An internship at Lazard Asset Management, team projects with real organisations at university, and a Bachelor of Commerce at Macquarie University.</p>
     {site.resumePdf && <p class="dl"><a class="btn ghost" href={site.resumePdf}>Download résumé (PDF)</a></p>}
   </PageHero>
   <section class="section first">
     <div class="wrap">
-      <section class="block">
-        <h2>One internship, three hats</h2>
-        <p class="sub">My title at Lazard was intern. The work spanned three roles, with some hands-on automation and app building along the way.</p>
-        <ul class="hats cycle">
-          {hats.map((h) => <li><b>{h.title}</b><span>{h.body}</span></li>)}
-        </ul>
-      </section>
+      <div class="tabs" role="tablist" aria-label="Experience">
+        {tabs.map((t, i) => (
+          <a class="tab-btn" role="tab" id={`tab-${t.id}`} href={`#${t.id}`} aria-controls={t.id} aria-selected={i === 0 ? 'true' : 'false'}>{t.label}</a>
+        ))}
+      </div>
 
-      {sections.map((s) => (
+      <section class="panel" id="lazard" role="tabpanel" aria-labelledby="tab-lazard">
         <section class="block">
-          <h2>{s.heading}</h2>
+          <h2>One internship, three hats</h2>
+          <p class="sub">My title at Lazard was intern. The work spanned three roles, with some hands-on automation and app building along the way.</p>
+          <ul class="hats cycle">
+            {hats.map((h) => <li><b>{h.title}</b><span>{h.body}</span></li>)}
+          </ul>
+        </section>
+        <section class="block">
+          <h2>What I did</h2>
           <ol class="timeline">
-            {s.items.map((item) => (
+            {experience.map((item) => (
               <li>
                 <div class="when" set:html={fill(item.period)} />
                 <div>
@@ -40,30 +46,136 @@ const sections = [
             ))}
           </ol>
         </section>
-      ))}
+      </section>
 
-      <section class="block">
-        <h2>What I studied</h2>
-        <div class="studied-grid">
-          <div class="st-box major">
-            <h3>Major</h3>
-            <ul class="tags">{studied.major.map((t) => <li>{t}</li>)}</ul>
+      <section class="panel" id="uni" role="tabpanel" aria-labelledby="tab-uni">
+        <section class="block">
+          <h2>University projects</h2>
+          <p class="sub">Two team projects with real organisations, and where I learned the most about leading people and managing time.</p>
+          <div class="uni cycle">
+            {uniProjects.map((u) => (
+              <article class="uni-card">
+                <p class="uni-kind">{u.kind}</p>
+                <h3>{u.title}</h3>
+                <p class="uni-partner"><b>Partner:</b> {u.partner}</p>
+                <p>{u.summary}</p>
+                <h4>What we did</h4>
+                <ul class="uni-did">{u.did.map((d) => <li>{d}</li>)}</ul>
+                <div class="uni-lead">
+                  <h4>My part in the team</h4>
+                  <p>{u.lead}</p>
+                </div>
+                <ul class="tags">{u.learned.map((t) => <li>{t}</li>)}</ul>
+              </article>
+            ))}
           </div>
-          <div class="st-box found">
-            <h3>Foundations</h3>
-            <p>A basic, working understanding of:</p>
-            <ul class="tags">{studied.foundations.map((t) => <li>{t}</li>)}</ul>
+        </section>
+      </section>
+
+      <section class="panel" id="education" role="tabpanel" aria-labelledby="tab-education">
+        <section class="block">
+          <h2>Education</h2>
+          <ol class="timeline">
+            {education.map((item) => (
+              <li>
+                <div class="when" set:html={fill(item.period)} />
+                <div>
+                  <h3>{item.title}</h3>
+                  <p class="org" set:html={fill(item.org)} />
+                  <ul>{item.points.map((pt) => <li set:html={fill(pt)} />)}</ul>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </section>
+        <section class="block">
+          <h2>What I studied</h2>
+          <div class="studied-grid">
+            <div class="st-box major">
+              <h3>Major</h3>
+              <ul class="tags">{studied.major.map((t) => <li>{t}</li>)}</ul>
+            </div>
+            <div class="st-box found">
+              <h3>Foundations</h3>
+              <p>A basic, working understanding of:</p>
+              <ul class="tags">{studied.foundations.map((t) => <li>{t}</li>)}</ul>
+            </div>
           </div>
-        </div>
+        </section>
       </section>
     </div>
   </section>
   <NextLinks current="/resume" />
 </Base>
 
+<script>
+  // Tabs: show one panel at a time. Without JavaScript every panel simply shows in order.
+  const root = document.documentElement;
+  root.classList.add('tabs-on');
+  const btns = Array.from(document.querySelectorAll<HTMLAnchorElement>('.tab-btn'));
+  const panels = Array.from(document.querySelectorAll<HTMLElement>('.panel'));
+  function show(id: string, focus = false) {
+    if (!panels.some((p) => p.id === id)) id = panels[0].id;
+    panels.forEach((p) => { p.hidden = p.id !== id; });
+    btns.forEach((b) => {
+      const on = b.getAttribute('aria-controls') === id;
+      b.setAttribute('aria-selected', String(on));
+      b.tabIndex = on ? 0 : -1;
+      if (on && focus) b.focus();
+    });
+  }
+  btns.forEach((b, i) => {
+    b.addEventListener('click', (e) => {
+      e.preventDefault();
+      const id = b.getAttribute('aria-controls')!;
+      show(id);
+      history.replaceState(null, '', `#${id}`);
+    });
+    b.addEventListener('keydown', (e) => {
+      if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+      const next = btns[(i + (e.key === 'ArrowRight' ? 1 : btns.length - 1)) % btns.length];
+      show(next.getAttribute('aria-controls')!, true);
+    });
+  });
+  show(location.hash.slice(1));
+  window.addEventListener('hashchange', () => show(location.hash.slice(1)));
+</script>
+
 <style>
   .top { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
   .first { padding-top: 1rem; }
+  .tabs {
+    display: flex; flex-wrap: nowrap; gap: 0.25rem; width: fit-content; max-width: 100%; overflow-x: auto; scrollbar-width: none;
+    padding: 0.35rem; border-radius: 999px; background: var(--surface); box-shadow: 0 0 0 1px var(--line);
+    position: sticky; top: 4.2rem; z-index: 5;
+  }
+  .tab-btn {
+    padding: 0.55rem 1.1rem; border-radius: 999px; text-decoration: none; font-weight: 600; font-size: 0.95rem;
+    color: var(--muted); transition: background-color 0.2s, color 0.2s;
+  }
+  .tab-btn:hover { color: var(--ink); }
+  .tab-btn[aria-selected='true'] { background: var(--accent); color: var(--on-accent); }
+  :global(html:not(.tabs-on)) .tabs { display: none; }
+  .panel > .block:first-child { margin-top: 2rem; }
+  .uni { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.25rem; margin-top: 1.25rem; }
+  .uni-card {
+    border-radius: 20px; padding: clamp(1.25rem, 3vw, 1.75rem); box-shadow: 0 0 0 1px var(--ring);
+    border-top: 4px solid var(--c); background: linear-gradient(180deg, var(--cs) 0, var(--surface) 40%);
+  }
+  .uni-kind { color: var(--c); font-weight: 650; font-size: 0.85rem; margin-bottom: 0.3rem; }
+  .uni-card h3 { font-size: clamp(1.2rem, 2vw, 1.45rem); margin-bottom: 0.5rem; }
+  .uni-card h4 { font-size: 0.95rem; margin: 1rem 0 0.4rem; }
+  .uni-card > p { color: var(--muted); font-size: 0.97rem; }
+  .uni-card .uni-partner { color: var(--ink); font-size: 0.92rem; }
+  .uni-partner b { color: var(--c); }
+  .uni-did { margin: 0; padding-left: 1.1rem; color: var(--muted); font-size: 0.95rem; }
+  .uni-did li { margin-bottom: 0.3rem; }
+  .uni-lead { margin: 1.1rem 0; padding: 0.9rem 1rem; border-radius: 14px; background: var(--cs); }
+  .uni-lead h4 { margin-top: 0; }
+  .uni-lead p { margin: 0; font-size: 0.95rem; }
+  @media (max-width: 52rem) { .uni { grid-template-columns: 1fr; } }
+  .tab-btn { white-space: nowrap; flex: none; }
+  @media (max-width: 30rem) { .tab-btn { padding: 0.5rem 0.7rem; font-size: 0.8rem; } }
   .dl { margin-top: 1.5rem; }
   .block { margin-top: 3rem; }
   .sub { color: var(--muted); }
