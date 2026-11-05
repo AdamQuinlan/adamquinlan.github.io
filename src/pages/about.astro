@@ -2,7 +2,7 @@
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import NextLinks from '../components/NextLinks.astro';
-import { site, skills, fill, facts, principles, toolkit } from '../data/site';
+import { site, skills, fill, facts, principles, toolkit, interests } from '../data/site';
 
 // Small line icons for each skill group.
 const icons: Record<string, string> = {
@@ -92,6 +92,18 @@ const icons: Record<string, string> = {
     </div>
   </section>
 
+  <section class="section">
+    <div class="wrap">
+      <h2>Outside work</h2>
+      <p class="sub-int">When I'm not building things, you'll find me doing one of these.</p>
+      <ul class="interests cycle">
+        {interests.map((i) => (
+          <li><svg viewBox="0 0 24 24" aria-hidden="true" set:html={i.icon} /><span>{i.name}</span></li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
   <NextLinks current="/about" />
 </Base>
 
@@ -108,6 +120,11 @@ const icons: Record<string, string> = {
   .principles .n { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: var(--c); color: #fff; font-weight: 700; font-size: 0.9rem; margin-bottom: 0.8rem; }
   .principles h3 { font-size: 1.1rem; margin-bottom: 0.4rem; }
   .principles p { color: var(--muted); font-size: 0.95rem; margin: 0; }
+  .sub-int { color: var(--muted); }
+  .interests { list-style: none; margin: 1.25rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; }
+  .interests li { display: flex; align-items: center; gap: 0.8rem; padding: 1rem 1.15rem; border-radius: 16px; background: var(--cs); font-weight: 650; }
+  .interests svg { width: 40px; height: 40px; flex: none; padding: 8px; border-radius: 12px; background: var(--surface); fill: none; stroke: var(--c); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  @media (max-width: 52rem) { .interests { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
   .toolkit { width: 100%; border-collapse: collapse; margin-top: 1.5rem; }
   .toolkit th, .toolkit td { text-align: left; padding: 0.9rem 0.75rem 0.9rem 0; border-top: 1px solid var(--line); vertical-align: top; }
   .toolkit thead th { font-size: 0.8rem; color: var(--muted); font-weight: 600; border-top: 0; }

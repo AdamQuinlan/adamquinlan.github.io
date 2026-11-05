@@ -38,6 +38,29 @@ const { project } = Astro.props as { project: Project };
           <h2>The problem</h2>
           <p set:html={fill(project.problem)} />
         </section>
+        {project.beforeAfter && (
+          <section class="ba-sec">
+            <h2>Before and after</h2>
+            <div class="ba">
+              <div class="ba-col before">
+                <div class="ba-head"><span class="ba-tag">Before</span><b>Checking by hand</b><span class="ba-time">{project.beforeAfter.before.time}</span></div>
+                <ol>
+                  {project.beforeAfter.before.steps.map((st) => (
+                    <li><span>{st.text}</span>{st.pain && <em>{st.pain}</em>}</li>
+                  ))}
+                </ol>
+              </div>
+              <div class="ba-col after">
+                <div class="ba-head"><span class="ba-tag">After</span><b>With the AI checker</b><span class="ba-time">{project.beforeAfter.after.time}</span></div>
+                <ol>
+                  {project.beforeAfter.after.steps.map((st) => (
+                    <li><span>{st.text}</span>{st.gain && <em>{st.gain}</em>}</li>
+                  ))}
+                </ol>
+              </div>
+            </div>
+          </section>
+        )}
         <section>
           <h2>How it flows</h2>
           <ol class="flow">
@@ -55,6 +78,12 @@ const { project } = Astro.props as { project: Project };
           <h2>The result</h2>
           <p set:html={fill(project.outcome)} />
         </section>
+        {project.next && (
+          <section class="whats-next">
+            <h2>What I'm working on now</h2>
+            <p>{project.next}</p>
+          </section>
+        )}
         {project.links && project.links.length > 0 && (
           <section>
             <h2>Links</h2>
@@ -101,8 +130,40 @@ const { project } = Astro.props as { project: Project };
     .metrics { grid-template-columns: 1fr; }
     .glance { grid-template-columns: 1fr 1fr; }
   }
+  .body:has(.ba-sec) { max-width: 60rem; }
+  .ba { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+  .ba-col { border-radius: 18px; padding: 1.1rem 1.2rem 1.25rem; box-shadow: 0 0 0 1px var(--ring); }
+  .ba-col.before { background: linear-gradient(180deg, var(--coral-soft) 0, var(--surface) 55%); border-top: 4px solid var(--coral); }
+  .ba-col.after { background: linear-gradient(180deg, var(--accent-soft) 0, var(--surface) 55%); border-top: 4px solid var(--accent); }
+  .ba-head { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem 0.6rem; margin-bottom: 0.9rem; }
+  .ba-head b { font-size: 1.05rem; }
+  .ba-tag { font-size: 0.75rem; font-weight: 700; padding: 0.15rem 0.55rem; border-radius: 999px; color: #fff; }
+  .before .ba-tag { background: var(--coral); }
+  .after .ba-tag { background: var(--accent); color: var(--on-accent); }
+  .ba-time { margin-left: auto; font-weight: 800; font-size: 1.15rem; letter-spacing: -0.02em; }
+  .before .ba-time { color: var(--coral); }
+  .after .ba-time { color: var(--accent); }
+  .ba ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.5rem; counter-reset: s; }
+  .ba li {
+    position: relative; counter-increment: s; padding: 0.55rem 0.75rem 0.55rem 2.4rem; border-radius: 12px;
+    background: var(--surface); box-shadow: 0 0 0 1px var(--line); font-size: 0.93rem; font-weight: 550;
+  }
+  .ba li::before {
+    content: counter(s); position: absolute; left: 0.65rem; top: 0.55rem; width: 1.3rem; height: 1.3rem; border-radius: 50%;
+    display: grid; place-items: center; font-size: 0.72rem; font-weight: 700;
+  }
+  .before li::before { background: var(--coral-soft); color: var(--coral); }
+  .after li::before { background: var(--accent-soft); color: var(--accent); }
+  .ba li span { display: block; }
+  .ba li em { display: block; font-style: normal; font-weight: 500; font-size: 0.82rem; margin-top: 0.15rem; }
+  .before li em { color: var(--coral); }
+  .after li em { color: var(--accent); }
+  @media (max-width: 44rem) { .ba { grid-template-columns: 1fr; } }
   .body { margin-top: 1rem; display: grid; gap: 2.5rem; max-width: 46rem; }
   .body h2 { font-size: var(--step-2); }
+  .whats-next { padding: 1.1rem 1.25rem; border-radius: 16px; background: var(--accent-soft); }
+  .whats-next h2 { font-size: 1.15rem !important; margin-bottom: 0.4rem; }
+  .whats-next p { margin: 0; }
   .steps { padding-left: 1.2rem; margin: 0; }
   .steps li { margin-bottom: 0.5rem; }
 </style>

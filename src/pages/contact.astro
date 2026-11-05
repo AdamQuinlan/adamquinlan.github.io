@@ -29,6 +29,14 @@ const channels = [
           <dt>Based in</dt>
           <dd set:html={fill(site.location)} />
         </div>
+        <div>
+          <dt>Available</dt>
+          <dd>From {site.available}</dd>
+        </div>
+        <div>
+          <dt>Work rights</dt>
+          <dd>{site.workRights}</dd>
+        </div>
       </dl>
       <div class="cta-row">
         <a class="btn" href={`mailto:${site.email}?subject=Hi%20Adam`}>Email me</a>

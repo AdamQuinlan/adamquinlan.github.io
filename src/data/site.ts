@@ -15,6 +15,8 @@ export const site = {
   linkedin: 'https://www.linkedin.com/in/adam-quinlan-89a5012b7/',
   resumePdf: '', // e.g. /resume.pdf once the file is added to the public folder
   openTo: 'Graduate business analyst and data analyst roles',
+  available: 'Monday 11 January 2027',
+  workRights: 'Australian citizen',
 };
 
 export const skills = {
@@ -36,6 +38,7 @@ export const experience = [
       'Since about September 2026 I have built the automation: when a new report is needed, it comes to me to create its master file end to end. The monthly run is handled by a colleague.',
       'Built checks into each master file’s transformation, such as flagging unassigned securities and confirming weights total 100%.',
       'Worked with the product and sales teams to understand their manual checking, then built an AI checking app with Claude Code, in Python, that went from prototype into production. Checking time fell from about an hour to about five minutes.',
+      'Now applying the same automation approach to our quarterly and annual reporting, including SRS documents and tax files.',
       'Helped wireframe ideas that the rest of my team then built. For example, a tool to replace most of our Salesforce work, leaving Salesforce as a contact list while the app creates campaigns and handles the rest. I worked through it with the sales team and wireframed it.',
     ],
   },
@@ -68,6 +71,11 @@ export type Project = {
   problem: string;
   approach: string[];
   outcome: string;
+  next?: string;
+  beforeAfter?: {
+    before: { steps: { text: string; pain?: string }[]; time: string };
+    after: { steps: { text: string; gain?: string }[]; time: string };
+  };
   links?: { label: string; url: string }[];
 };
 
@@ -98,6 +106,7 @@ export const projects: Project[] = [
       'The outputs are saved as draft documents and handed to the product or sales team to finalise, now using the AI checking app.',
       'I handed the monthly run to a colleague. When a new report is needed, it comes to me and I build its master file end to end.',
     ],
+    next: 'I am now applying the same approach to our quarterly and annual reporting, including SRS documents and tax files.',
     outcome:
       'Our team built around 200 master files. Compiling the full line of reports now takes about six days (four full days and two part days waiting on data) instead of two weeks, it is run by one person instead of two, and far fewer reports come back with errors.',
   },
@@ -115,6 +124,29 @@ export const projects: Project[] = [
       { value: '3', label: 'specialist AI agents that cross-check each other' },
       { value: 'Live', label: 'in production for product and sales' },
     ],
+    beforeAfter: {
+      before: {
+        time: '~60 min per report',
+        steps: [
+          { text: 'Draft report arrives for checking' },
+          { text: 'Find five or six raw data sources', pain: 'Saved in different folders, specific to each task' },
+          { text: 'Pull figures from Argos, FactSet and other systems', pain: 'Numbers change as month-end is finalised' },
+          { text: 'Work out which version of the data is current', pain: 'Easy to compare against the wrong one' },
+          { text: 'Compare every figure, table and sentence by hand' },
+          { text: 'Note issues and send back for fixes' },
+        ],
+      },
+      after: {
+        time: '~5 min per report',
+        steps: [
+          { text: 'Draft report goes into the app' },
+          { text: 'Three agents check it at once', gain: 'Visual, period-on-period and raw data checks' },
+          { text: 'Agents reconcile their findings', gain: 'False alarms are filtered out' },
+          { text: 'One list comes back: fine, look at, fix' },
+          { text: 'Reviewer checks only what is flagged' },
+        ],
+      },
+    },
     flow: ['Draft factsheet', { step: 'Agents run', sub: ['Visual agent', 'Period agent', 'Raw data agent'] }, 'Agents reconcile', 'Fine / look at / fix'],
     problem:
       'Before a report reached a client, the product and sales teams checked it by hand, and each check took about an hour. To compare the output against the raw data, they had to pull up five or six sources saved in different folders, specific to each task and spread across systems such as Argos and FactSet. The raw data also changed as last month’s month-end was finalised, so the same source could show different numbers depending on the day. People sometimes compared against the wrong version, which caused errors and confusion.',
@@ -195,8 +227,18 @@ export const facts = [
   { label: 'Now', value: 'Intern at Lazard Asset Management, March 2026 – January 2027' },
   { label: 'Studying', value: 'Bachelor of Commerce (International Business), Macquarie University' },
   { label: 'Graduating', value: 'November 2026' },
+  { label: 'Working on', value: 'Automating our quarterly and annual reporting, including SRS documents and tax files' },
   { label: 'Learning', value: 'SQL and Python' },
   { label: 'Looking for', value: 'Graduate business analyst and data analyst roles' },
+  { label: 'Available from', value: 'Monday 11 January 2027' },
+  { label: 'Work rights', value: 'Australian citizen' },
+];
+
+export const interests = [
+  { name: 'Hiking', icon: '<path d="M3 20l6-11 4 6 3-4 5 9z"/><circle cx="17" cy="5" r="2"/>' },
+  { name: 'Video games', icon: '<rect x="2" y="7" width="20" height="11" rx="5"/><path d="M7 11v3M5.5 12.5h3"/><circle cx="16" cy="11.5" r="1"/><circle cx="18" cy="13.5" r="1"/>' },
+  { name: 'Basketball', icon: '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3v18M5.6 5.6c3.5 3.5 3.5 9.3 0 12.8M18.4 5.6c-3.5 3.5-3.5 9.3 0 12.8"/>' },
+  { name: 'Golf', icon: '<path d="M8 21V3l9 4-9 4"/><path d="M5 21h8"/>' },
 ];
 
 export const strengths = [
