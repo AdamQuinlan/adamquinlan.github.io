@@ -21,7 +21,7 @@ export const skills = {
   'Data and automation': ['Excel automation', 'Excel formulas and VBA macros', 'Dynamic named ranges', 'Built-in data checks', 'Report automation'],
   'Currently learning': ['SQL', 'Python'],
   'AI': ['Claude Code', 'Multi-agent workflows', 'Prompt design', 'AI app design'],
-  'Platforms': ['Azure', 'Microsoft Office', 'Coder'],
+  'Platforms': ['Snowflake', 'Azure', 'Microsoft Office', 'Coder'],
   'Business': ['Business analysis', 'Accounting and finance', 'Marketing', 'Economics', 'People and team management', 'Cross-cultural communication'],
 };
 
@@ -225,6 +225,7 @@ export const toolkit = [
   { tool: 'Microsoft Excel and VBA', use: 'Master files with formulas, macros, dynamic named ranges and built-in checks.' },
   { tool: 'Claude Code', use: 'Built the AI factsheet checker, in Python and VS Code, from prototype to production.' },
   { tool: 'Prompt design', use: 'Wrote and refined each agent’s instructions, using Claude to sharpen them.' },
+  { tool: 'Snowflake', use: 'Cloud data platform I know how to use for working with data.' },
   { tool: 'Microsoft Office', use: 'Excel master files that produce Office outputs, Outlook and day-to-day reporting.' },
   { tool: 'Coder', use: 'Used to host our team’s websites.' },
   { tool: 'SQL and Python', use: 'I have used both to build things, including the checker in Python, but I don’t have an in-depth understanding of either yet. That is what I am working on now.' },
