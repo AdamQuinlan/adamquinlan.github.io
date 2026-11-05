@@ -13,7 +13,7 @@ export const site = {
   email: 'adamquinlana@gmail.com',
   github: 'https://github.com/AdamQuinlan',
   linkedin: 'https://www.linkedin.com/in/adam-quinlan-89a5012b7/',
-  resumePdf: '', // e.g. /resume.pdf once the file is added to the public folder
+  resumePdf: '/Adam_Quinlan_CV.pdf',
   openTo: 'Graduate business analyst and data analyst roles',
   available: 'Monday 11 January 2027',
   workRights: 'Australian citizen',
@@ -24,7 +24,7 @@ export const skills = {
   'Currently learning': ['SQL', 'Python'],
   'AI': ['Claude Code', 'Multi-agent workflows', 'Prompt design', 'AI app design'],
   'Platforms': ['Snowflake', 'Azure', 'Microsoft Office', 'Coder'],
-  'Business': ['Business analysis', 'Accounting and finance', 'Marketing', 'Economics', 'People and team management', 'Cross-cultural communication'],
+  'Business': ['Business analysis', 'Wireframing', 'Accounting and finance', 'Marketing', 'Economics', 'People and team management', 'Cross-cultural communication'],
 };
 
 export const experience = [
@@ -37,6 +37,7 @@ export const experience = [
       'Joined just as the team began moving monthly client reporting from manual to automated, and helped finish the system of around 200 Excel master files. Compiling the full line of reports fell from about two weeks to about six days, run by one person instead of two.',
       'Since about September 2026 I have built the automation: when a new report is needed, it comes to me to create its master file end to end. The monthly run is handled by a colleague.',
       'Built checks into each master file’s transformation, such as flagging unassigned securities and confirming weights total 100%.',
+      'Use Snowflake with the team for data storage and containers, so our apps can access each other’s data.',
       'Worked with the product and sales teams to understand their manual checking, then built an AI checking app with Claude Code, in Python, that went from prototype into production. Checking time fell from about an hour to about five minutes.',
       'Now applying the same automation approach to our quarterly and annual reporting, including SRS documents and tax files.',
       'Helped wireframe ideas that the rest of my team then built. For example, a tool to replace most of our Salesforce work, leaving Salesforce as a contact list while the app creates campaigns and handles the rest. I worked through it with the sales team and wireframed it.',
@@ -251,7 +252,7 @@ export const strengths = [
 export const hubLinks = [
   { href: '/about', title: 'About', body: 'My background, how I work, and my toolkit.', icon: 'person' },
   { href: '/projects', title: 'Projects', body: 'Client report automation and the AI factsheet checker, in detail.', icon: 'grid' },
-  { href: '/resume', title: 'Experience', body: 'My internship at Lazard, university projects, and my degree.', icon: 'path' },
+  { href: '/resume', title: 'Experience', body: 'My internship at Lazard, university projects, hospitality and my degree.', icon: 'path' },
   { href: '/what-i-bring', title: 'What I bring', body: 'What I can do for your team, with proof.', icon: 'spark' },
   { href: '/contact', title: 'Contact', body: 'Email, LinkedIn, and where I’m based.', icon: 'mail' },
 ];
@@ -267,7 +268,7 @@ export const toolkit = [
   { tool: 'Microsoft Excel and VBA', use: 'Master files with formulas, macros, dynamic named ranges and built-in checks.' },
   { tool: 'Claude Code', use: 'Built the AI factsheet checker, in Python and VS Code, from prototype to production.' },
   { tool: 'Prompt design', use: 'Wrote and refined each agent’s instructions, using Claude to sharpen them.' },
-  { tool: 'Snowflake', use: 'Cloud data platform I know how to use for working with data.' },
+  { tool: 'Snowflake', use: 'Used with my team for data storage and containers, so our apps can access each other’s data.' },
   { tool: 'Microsoft Office', use: 'Excel master files that produce Office outputs, Outlook and day-to-day reporting.' },
   { tool: 'Coder', use: 'Used to host our team’s websites.' },
   { tool: 'SQL and Python', use: 'I have used both to build things, including the checker in Python, but I don’t have an in-depth understanding of either yet. That is what I am working on now.' },
@@ -319,4 +320,20 @@ export const uniProjects = [
       'I learned why people drift from an agreed schedule and how to bring them back, again by matching work to strengths. I also managed the relationship with our partner: keeping her informed, making sure she was comfortable with our direction, and being honest about what we found.',
     learned: ['Managing a stakeholder', 'Keeping a team on schedule', 'Honest analysis', 'International business'],
   },
+];
+
+// ---------- Other work ----------
+
+export const otherWork = [
+  {
+    title: 'Waiter, then Floor Manager',
+    org: 'Fat Pomelo',
+    period: 'Early 2025 – December 2025',
+    points: [
+      'Promoted to Floor Manager: led the service process and helped plan each evening, including seating and customers.',
+      'Covered reception, the bar, the pass and the floor as needed, helped restock, and settled staff disputes.',
+    ],
+  },
+  { title: 'Waiter', org: 'Frankie’s Food Factory', period: 'Early 2024 – Early 2025', points: [] },
+  { title: 'Waiter', org: 'Waterfront Cafe', period: '2022 – 2023', points: [] },
 ];

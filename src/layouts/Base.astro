@@ -70,6 +70,7 @@ const nav = [
                 </a>
               </li>
             ))}
+            {site.resumePdf && <li><a class="cv-link" href={site.resumePdf} download>CV</a></li>}
           </ul>
         </nav>
       </div>
@@ -166,6 +167,9 @@ const nav = [
     nav a { font-size: 0.78rem; }
   }
   nav a[aria-current='page'] { box-shadow: 0 2px 0 var(--accent); }
+  nav a.cv-link { color: var(--on-accent); background: var(--accent); padding: 0.2rem 0.75rem; border-radius: 999px; font-weight: 600; }
+  nav a.cv-link:hover { color: var(--on-accent); opacity: 0.9; }
+  :global(html.nav-dark) nav a.cv-link { color: #04272b; background: #5fd0d9; }
 
   .site-footer { border-top: 1px solid var(--line); margin-top: 2rem; }
   .foot {

@@ -63,6 +63,7 @@ import { site, proof, offers, startPlan } from '../data/site';
       <div class="actions">
         <a class="btn light" href="/contact">Get in touch</a>
         {site.linkedin && <a class="btn ghost light" href={site.linkedin}>Connect on LinkedIn</a>}
+        {site.resumePdf && <a class="btn ghost light" href={site.resumePdf} download>Download my CV</a>}
       </div>
     </div>
   </section>

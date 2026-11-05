@@ -137,6 +137,7 @@ const w = (t: string, fs: number) => Math.round(t.length * fs * 0.56 + 28);
           <div class="now-actions">
             <a class="btn" href={`mailto:${site.email}`}>Email me</a>
             <a class="btn ghost" href={site.linkedin}>LinkedIn</a>
+            {site.resumePdf && <a class="btn ghost" href={site.resumePdf} download>Download CV</a>}
           </div>
         </aside>
       </div>

@@ -2,18 +2,19 @@
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import NextLinks from '../components/NextLinks.astro';
-import { site, experience, education, fill, hats, studied, uniProjects } from '../data/site';
+import { site, experience, education, fill, hats, studied, uniProjects, otherWork } from '../data/site';
 
 const tabs = [
   { id: 'lazard', label: 'Lazard internship' },
   { id: 'uni', label: 'University projects' },
+  { id: 'hospitality', label: 'Hospitality' },
   { id: 'education', label: 'Education' },
 ];
 ---
 <Base title="Experience" description="Work experience and education.">
   <PageHero title="Experience" kicker="Where I've been, where I'm heading" art="experience">
-    <p class="lede">An internship at Lazard Asset Management, team projects with real organisations at university, and a Bachelor of Commerce at Macquarie University.</p>
-    {site.resumePdf && <p class="dl"><a class="btn ghost" href={site.resumePdf}>Download résumé (PDF)</a></p>}
+    <p class="lede">An internship at Lazard Asset Management, team projects with real organisations at university, four years in hospitality, and a Bachelor of Commerce at Macquarie University.</p>
+    {site.resumePdf && <p class="dl"><a class="btn ghost" href={site.resumePdf}>Download my CV (PDF)</a></p>}
   </PageHero>
   <section class="section first">
     <div class="wrap">
@@ -69,6 +70,25 @@ const tabs = [
               </article>
             ))}
           </div>
+        </section>
+      </section>
+
+      <section class="panel" id="hospitality" role="tabpanel" aria-labelledby="tab-hospitality">
+        <section class="block">
+          <h2>Hospitality</h2>
+          <p class="sub">Four years in restaurants and cafes alongside my degree, ending as a floor manager. It is where I first learned to plan under pressure, keep a team moving and calm things down when they go wrong.</p>
+          <ol class="timeline">
+            {otherWork.map((item) => (
+              <li>
+                <div class="when">{item.period}</div>
+                <div>
+                  <h3>{item.title}</h3>
+                  <p class="org">{item.org}</p>
+                  {item.points.length > 0 && <ul>{item.points.map((pt) => <li>{pt}</li>)}</ul>}
+                </div>
+              </li>
+            ))}
+          </ol>
         </section>
       </section>
 

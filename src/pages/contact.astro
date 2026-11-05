@@ -41,6 +41,7 @@ const channels = [
       <div class="cta-row">
         <a class="btn" href={`mailto:${site.email}?subject=Hi%20Adam`}>Email me</a>
         <a class="btn ghost" href={site.linkedin}>Connect on LinkedIn</a>
+        {site.resumePdf && <a class="btn ghost" href={site.resumePdf} download>Download my CV (PDF)</a>}
       </div>
     </div>
   </section>
